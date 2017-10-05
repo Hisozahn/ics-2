@@ -179,11 +179,44 @@ void SetSnake(char head, char tail) {
 }
 
 void anim_m() {
-	static char i = 0;
-
-	SetSnake(7, i);
-	i = (i + 1) % LED_COUNT;
-	
+    static const char LEFT = 0;
+    static const char RIGHT = 1;
+	static char head = 5;
+    static char tail = 0;
+    static char direction = RIGHT;
+    if (direction == RIGHT && head < 5) {
+        ++head;
+    }
+    else if (direction == RIGHT && head >= 5) {
+        if (tail < LED_COUNT - 1) {
+            ++tail;
+            if (head < LED_COUNT - 1) {
+                ++head;
+            }
+        }
+        else {
+            tail = LED_COUNT - 1;
+            head = LED_COUNT - 2;
+            direction = LEFT;
+        }
+    }
+    else if (direction == LEFT && head > 2) {
+        --head;
+    }
+    else if (direction == LEFT && head <= 2) {
+        if (tail > 0) {
+            --tail;
+            if (head > 0) {
+                --head;
+            }
+        }
+        else {
+            tail = 0;
+            head = 1;
+            direction = RIGHT;
+        }
+    }
+	SetSnake(head, tail);
 }
 
 void T0_ISR( void ) __interrupt ( 1 )
@@ -204,7 +237,7 @@ void T0_ISR( void ) __interrupt ( 1 )
 	tick++;
 	WriteLED(led);
 	TH0 = 0xFF;
-	TL0 = 0xF0;
+	TL0 = 0x0F;
 	r++;
 	if (r == 0xfff) {
 		//anim();
@@ -263,8 +296,7 @@ void main( void )
 	ET0 = 1; EA = 1;
 	while( 1 ) {
 		anim_m();
-		delay(3);
-		anim_m();
-		delay(3);
+        //DelayMs(100);
+		delay(100);
 	}
 }
