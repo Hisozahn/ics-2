@@ -31,68 +31,42 @@ void SetSnake(char head, char tail) {
 
 
 void anim_m() {
-	unsigned char g = (unsigned char) (GetMsCounter()/1000);
-	g = (unsigned char)sizeof(long);
-	leds(g);
-	
-	/*return;
-	static char i = 0;
-
-	SetSnake(7, i);
-	i = (i + 1) % LED_COUNT;
-	*/
-}
-
-unsigned int head = 5;
-unsigned int tail = 0;	
-unsigned int direction = DIR_RIGHT;
-
-void anim() {
-	unsigned int i;
-	unsigned int current_brightness = 100;
-	for (i = 0; i < LED_COUNT - 1; i++) {
-		SetBrightness(i, 0);
-	}
-	
-	if (direction == DIR_RIGHT) {
-		SetBrightness(7, 100);
-		for (i = head; i >= tail; i--) {
-			SetBrightness(i, current_brightness);
-			current_brightness -= 20;
-		}			
-		
-		head++;
-		if (head > LED_COUNT - 1) {
-			head = 7;
-		}
-		tail++;
-		if (tail > LED_COUNT - 1) {
-			tail = 7;
-		}		
-		if (head == 7 && tail == 7) {
-			direction = DIR_LEFT;
-		}
-			
-	}
-	/*else
-	{
-		for (i = head; i <= tail; i++) {
-			SetBrightness(i, current_brightness);
-			current_brightness -= 20;
-		}	
-		
-		
-		head--;
-		if (head > LED_COUNT - 1) {
-			head = 0;
-		}
-		tail--;
-		if (tail > LED_COUNT - 1) {
-			tail = 0;
-		}
-		if (head == 7 && tail == 7) {
-			direction = DIR_RIGHT;
-		}
-	
-	}*/
+	static const char LEFT = 0;
+    static const char RIGHT = 1;
+	static char head = 5;
+    static char tail = 0;
+    static char direction = RIGHT;
+    if (direction == RIGHT && head < 5) {
+        ++head;
+    }
+    else if (direction == RIGHT && head >= 5) {
+        if (tail < LED_COUNT - 1) {
+            ++tail;
+            if (head < LED_COUNT - 1) {
+                ++head;
+            }
+        }
+        else {
+            tail = LED_COUNT - 1;
+            head = LED_COUNT - 2;
+            direction = LEFT;
+        }
+    }
+    else if (direction == LEFT && head > 2) {
+        --head;
+    }
+    else if (direction == LEFT && head <= 2) {
+        if (tail > 0) {
+            --tail;
+            if (head > 0) {
+                --head;
+            }
+        }
+        else {
+            tail = 0;
+            head = 1;
+            direction = RIGHT;
+        }
+    }
+	SetSnake(head, tail);
 }

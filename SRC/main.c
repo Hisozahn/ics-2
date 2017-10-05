@@ -9,7 +9,7 @@ void main( void )
 	InitTimer();
 	while( 1 ) {
 		anim_m();
-		DelayMs(1000);
+		DelayMs(500);
 		//delay(3);
 		//anim_m();
 		//delay(3);

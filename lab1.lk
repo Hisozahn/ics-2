@@ -14,6 +14,10 @@
 -l libint
 -l liblong
 -l libfloat
+SRC/main.rel
 SRC/sys_timer.rel
+SRC/led.rel
+SRC/max.rel
+SRC/anim.rel
 
 -e

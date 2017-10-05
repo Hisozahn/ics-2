@@ -7,5 +7,6 @@ void led( unsigned char n, unsigned char on );
 void leds( unsigned char on );
 void SetBrightness(unsigned char ledId, unsigned char b);
 void SetBrightnesses(const unsigned char* brigthness_v);
+void T1_ISR( void ) __interrupt ( 3 );
 
 #endif //__LED__H

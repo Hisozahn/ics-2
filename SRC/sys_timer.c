@@ -7,6 +7,7 @@ void delayMs(unsigned long t);*/
 #include "aduc812.h"
 #include <stdlib.h>
 #include <string.h>
+#include "led.h"
 #include "sys_timer.h"
 #include "max.h"
 #define MAXBASE 8
@@ -45,11 +46,6 @@ void DelayMs( unsigned long ms )
        if ( DTimeMs( t1 ) > ms ) break; 
  }   
 } 
-
-unsigned int r = 0;
-unsigned char tick = 1;
-unsigned char brightness[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
-
 /*void SetBrightness(unsigned char ledId, unsigned char b) {
 	if (b > 100) {
 		return;
@@ -62,13 +58,13 @@ unsigned char brightness[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
 	brightness[ledId] = b;
 }*/
 
-void SetBrightnesses(const unsigned char* brigthness_v) {
+/*void SetBrightnesses(const unsigned char* brigthness_v) {
 	ET0 = 0;
 	memcpy(brightness, brigthness_v, LED_COUNT);
 	ET0 = 1;
-}
+}*/
 
-void SetSnake(char head, char tail) {
+/*void SetSnake(char head, char tail) {
 	
 	char delta_brightness = 100 / ( abs(tail - head) + 1 );
 	char i;
@@ -93,9 +89,9 @@ void SetSnake(char head, char tail) {
 	}
 	
 	SetBrightnesses(brigthness_v);
-}
+}*/
 
-void anim_m() {
+/*void anim_m() {
     static const char LEFT = 0;
     static const char RIGHT = 1;
 	static char head = 5;
@@ -134,7 +130,7 @@ void anim_m() {
         }
     }
 	SetSnake(head, tail);
-}
+}*/
 
 void T0_ISR( void ) __interrupt ( 1 )
 {	
@@ -166,6 +162,8 @@ void T0_ISR( void ) __interrupt ( 1 )
 	}
 		*/
 }
+
+
 //////////////////////// SetVector //////////////////////////
 // Функция, устанавливающая вектор прерывания в
 // пользовательской таблице прерываний.
@@ -195,10 +193,13 @@ void SetVector(unsigned char __xdata * Address, void * Vector)
 void InitTimer( void ) {
 	TH0 = 0xFB; // Инициализация таймера 0
 	TL0 = 0xC2; //
-	TMOD = 0x01; //
-	TCON = 0x10; //
+	TMOD = 0x11; //
+	TCON = 0x50; //
 	// Установка вектора в пользовательской таблице
 	SetVector( 0x200B, (void *)T0_ISR );
+    SetVector( 0x201B, (void *)T1_ISR );
 	// Разрешение прерываний от таймера 0
-	ET0 = 1; EA = 1;
+	ET0 = 1;
+    ET1 = 1;
+    EA = 1;
 }
