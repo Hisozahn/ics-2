@@ -31,7 +31,7 @@ BAUD	 = 9600
 SRC_DIR = SRC
 # ---------------------------------------------------------------------------
 
-all: lab1
+all: lab1	load
 
 clean:
 	del $(NAME).hex
@@ -61,10 +61,11 @@ term:
 
 
 LAB_SRC = \
-$(SRC_DIR)/sys_timer.c
-#$(SRC_DIR)/led.c \
-#$(SRC_DIR)/max.c \
-#$(SRC_DIR)/lab1.c 
+$(SRC_DIR)/main.c \
+$(SRC_DIR)/sys_timer.c \
+$(SRC_DIR)/led.c \
+$(SRC_DIR)/max.c \
+$(SRC_DIR)/anim.c
 
 LAB_OBJ = $(LAB_SRC:.c=.rel)
 

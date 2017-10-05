@@ -26,8 +26,11 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
 e-mail: kluchev@d1.ifmo.ru
 
 ****************************************************************************/
+
 #include "aduc812.h"
 #include "max.h"
+#include "led.h"
+#include <string.h>
 
 static unsigned char old_led = 0;   // "Видеопамять" линейки светодиодов
 
@@ -91,7 +94,45 @@ void leds( unsigned char on )
     old_led = on;
 }
 
+//////////////////////// WriteLED ///////////////////////////
+// Функция установки состояния линейки светодиодов.
+// Вход:
+// value – состояния светодиодов.
+// Выход: нет.
+// Результат: нет.
+//////////////////////////////////////////////////////////////
+void WriteLED(unsigned char value)
+{
+	// Запись состояния светодиодов в регистр 7-й регистр ПЛИС
+	write_max( 7, value );
+}
+//////////////////////// T0_ISR //////////////////////////////
+// Обработчик прерывания от таймера 0.
+// Вход: нет.
+// Выход: нет.
+// Результат: нет.
+//////////////////////////////////////////////////////////////
+unsigned int r = 0;
+unsigned char tick = 1;
+unsigned char brightness[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
 
+void SetBrightness(unsigned char ledId, unsigned char b) {
+	if (b > 100) {
+		return;
+	}
+	
+	if (ledId > LED_COUNT - 1) {
+		return;
+	}
+	
+	brightness[ledId] = b;
+}
+
+void SetBrightnesses(const unsigned char* brigthness_v) {
+	ET0 = 0;
+	memcpy(brightness, brigthness_v, LED_COUNT);
+	ET0 = 1;
+}
 
 
 
