@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-                              4 ; This file was generated Fri Oct 06 15:18:23 2017
+                              4 ; This file was generated Fri Oct 06 16:12:22 2017
                               5 ;--------------------------------------------------------
                               6 	.module sys_timer
                               7 	.optsdcc -mmcs51 --model-small
@@ -651,24 +651,24 @@
                             651 ;Address                   Allocated to registers r6 r7 
                             652 ;TmpVector                 Allocated to registers r6 r7 
                             653 ;------------------------------------------------------------
-                            654 ;	SRC/sys_timer.c:110: void SetVector(unsigned char __xdata * Address, void * Vector)
+                            654 ;	SRC/sys_timer.c:115: void SetVector(unsigned char __xdata * Address, void * Vector)
                             655 ;	-----------------------------------------
                             656 ;	 function SetVector
                             657 ;	-----------------------------------------
    010B                     658 _SetVector:
    010B C0*00               659 	push	_bp
    010D 85 81*00            660 	mov	_bp,sp
-                            661 ;	SRC/sys_timer.c:116: *Address = 0x02;
+                            661 ;	SRC/sys_timer.c:121: *Address = 0x02;
    0110 AE 82               662 	mov	r6,dpl
    0112 AF 83               663 	mov  r7,dph
    0114 74 02               664 	mov	a,#0x02
    0116 F0                  665 	movx	@dptr,a
-                            666 ;	SRC/sys_timer.c:118: TmpVector = (unsigned char __xdata *) (Address + 1);
+                            666 ;	SRC/sys_timer.c:123: TmpVector = (unsigned char __xdata *) (Address + 1);
    0117 0E                  667 	inc	r6
    0118 BE 00 01            668 	cjne	r6,#0x00,00103$
    011B 0F                  669 	inc	r7
    011C                     670 00103$:
-                            671 ;	SRC/sys_timer.c:119: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
+                            671 ;	SRC/sys_timer.c:124: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
    011C E5*00               672 	mov	a,_bp
    011E 24 FB               673 	add	a,#0xfb
    0120 F8                  674 	mov	r0,a
@@ -683,8 +683,8 @@
    012E A3                  683 	inc	dptr
    012F AE 82               684 	mov	r6,dpl
    0131 AF 83               685 	mov	r7,dph
-                            686 ;	SRC/sys_timer.c:120: ++TmpVector;
-                            687 ;	SRC/sys_timer.c:121: *TmpVector = (unsigned char) Vector;
+                            686 ;	SRC/sys_timer.c:125: ++TmpVector;
+                            687 ;	SRC/sys_timer.c:126: *TmpVector = (unsigned char) Vector;
    0133 E5*00               688 	mov	a,_bp
    0135 24 FB               689 	add	a,#0xfb
    0137 F8                  690 	mov	r0,a
@@ -698,16 +698,16 @@
                             698 ;------------------------------------------------------------
                             699 ;Allocation info for local variables in function 'InitTimer'
                             700 ;------------------------------------------------------------
-                            701 ;	SRC/sys_timer.c:127: void InitTimer( void ) {
+                            701 ;	SRC/sys_timer.c:132: void InitTimer( void ) {
                             702 ;	-----------------------------------------
                             703 ;	 function InitTimer
                             704 ;	-----------------------------------------
    0143                     705 _InitTimer:
-                            706 ;	SRC/sys_timer.c:131: TMOD = 0x01 + 0x00;//+ 0x80; //
+                            706 ;	SRC/sys_timer.c:138: TMOD = 0x01 + 0x00;
    0143 75 89 01            707 	mov	_TMOD,#0x01
-                            708 ;	SRC/sys_timer.c:132: TCON = 0x10 + 0x01; //+ 0x04; //    
+                            708 ;	SRC/sys_timer.c:139: TCON = 0x10 + 0x01;
    0146 75 88 11            709 	mov	_TCON,#0x11
-                            710 ;	SRC/sys_timer.c:134: SetVector( 0x200B, (void *)T0_ISR );
+                            710 ;	SRC/sys_timer.c:142: SetVector( 0x200B, (void *)T0_ISR );
    0149 7Dr00               711 	mov	r5,#_T0_ISR
    014B 7Es00               712 	mov	r6,#(_T0_ISR >> 8)
    014D 7F 80               713 	mov	r7,#0x80
@@ -719,7 +719,7 @@
    015B 15 81               719 	dec	sp
    015D 15 81               720 	dec	sp
    015F 15 81               721 	dec	sp
-                            722 ;	SRC/sys_timer.c:136: SetVector( 0x2003, (void *)INT0_handler );
+                            722 ;	SRC/sys_timer.c:144: SetVector( 0x2003, (void *)INT0_handler );
    0161 7DrC9               723 	mov	r5,#_INT0_handler
    0163 7Es00               724 	mov	r6,#(_INT0_handler >> 8)
    0165 7F 80               725 	mov	r7,#0x80
@@ -731,7 +731,7 @@
    0173 15 81               731 	dec	sp
    0175 15 81               732 	dec	sp
    0177 15 81               733 	dec	sp
-                            734 ;	SRC/sys_timer.c:139: SetVector( 0x202B, (void *)T2_handler );
+                            734 ;	SRC/sys_timer.c:147: SetVector( 0x202B, (void *)T2_handler );
    0179 7DrA6               735 	mov	r5,#_T2_handler
    017B 7Es00               736 	mov	r6,#(_T2_handler >> 8)
    017D 7F 80               737 	mov	r7,#0x80
@@ -743,23 +743,23 @@
    018B 15 81               743 	dec	sp
    018D 15 81               744 	dec	sp
    018F 15 81               745 	dec	sp
-                            746 ;	SRC/sys_timer.c:141: ET0 = 1;
+                            746 ;	SRC/sys_timer.c:149: ET0 = 1;
    0191 D2 A9               747 	setb	_ET0
-                            748 ;	SRC/sys_timer.c:143: EX0 = 1;    //INT0 inteerupt enable
+                            748 ;	SRC/sys_timer.c:151: EX0 = 1;    //INT0 inteerupt enable
    0193 D2 A8               749 	setb	_EX0
-                            750 ;	SRC/sys_timer.c:148: PT2 = 1;        // Timer 2 high priority
+                            750 ;	SRC/sys_timer.c:156: PT2 = 1;        // Timer 2 high priority
    0195 D2 BD               751 	setb	_PT2
-                            752 ;	SRC/sys_timer.c:149: PT0 = 0;        // Timer 0 low priority
+                            752 ;	SRC/sys_timer.c:157: PT0 = 0;        // Timer 0 low priority
    0197 C2 B9               753 	clr	_PT0
-                            754 ;	SRC/sys_timer.c:150: TR2 = 1;        // Timer 2 start
+                            754 ;	SRC/sys_timer.c:158: TR2 = 1;        // Timer 2 start
    0199 D2 CA               755 	setb	_TR2
-                            756 ;	SRC/sys_timer.c:151: TH2 = 0xFB;     // Timer 2 high byte
+                            756 ;	SRC/sys_timer.c:159: TH2 = 0xFB;     // Timer 2 high byte
    019B 75 CD FB            757 	mov	_TH2,#0xFB
-                            758 ;	SRC/sys_timer.c:152: TL2 = 0xC2;     // Timer 2 low byte
+                            758 ;	SRC/sys_timer.c:160: TL2 = 0xC2;     // Timer 2 low byte
    019E 75 CC C2            759 	mov	_TL2,#0xC2
-                            760 ;	SRC/sys_timer.c:153: ET2 = 1;        // Timer 2 enable interrupts
+                            760 ;	SRC/sys_timer.c:161: ET2 = 1;        // Timer 2 enable interrupts
    01A1 D2 AD               761 	setb	_ET2
-                            762 ;	SRC/sys_timer.c:154: EA = 1;         // Enable global interrupts
+                            762 ;	SRC/sys_timer.c:162: EA = 1;         // Enable global interrupts
    01A3 D2 AF               763 	setb	_EA
    01A5 22                  764 	ret
                             765 	.area CSEG    (CODE)

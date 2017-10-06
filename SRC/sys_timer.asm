@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-; This file was generated Fri Oct 06 15:18:23 2017
+; This file was generated Fri Oct 06 16:12:22 2017
 ;--------------------------------------------------------
 	.module sys_timer
 	.optsdcc -mmcs51 --model-small
@@ -651,24 +651,24 @@ _INT0_handler:
 ;Address                   Allocated to registers r6 r7 
 ;TmpVector                 Allocated to registers r6 r7 
 ;------------------------------------------------------------
-;	SRC/sys_timer.c:110: void SetVector(unsigned char __xdata * Address, void * Vector)
+;	SRC/sys_timer.c:115: void SetVector(unsigned char __xdata * Address, void * Vector)
 ;	-----------------------------------------
 ;	 function SetVector
 ;	-----------------------------------------
 _SetVector:
 	push	_bp
 	mov	_bp,sp
-;	SRC/sys_timer.c:116: *Address = 0x02;
+;	SRC/sys_timer.c:121: *Address = 0x02;
 	mov	r6,dpl
 	mov  r7,dph
 	mov	a,#0x02
 	movx	@dptr,a
-;	SRC/sys_timer.c:118: TmpVector = (unsigned char __xdata *) (Address + 1);
+;	SRC/sys_timer.c:123: TmpVector = (unsigned char __xdata *) (Address + 1);
 	inc	r6
 	cjne	r6,#0x00,00103$
 	inc	r7
 00103$:
-;	SRC/sys_timer.c:119: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
+;	SRC/sys_timer.c:124: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
 	mov	a,_bp
 	add	a,#0xfb
 	mov	r0,a
@@ -683,8 +683,8 @@ _SetVector:
 	inc	dptr
 	mov	r6,dpl
 	mov	r7,dph
-;	SRC/sys_timer.c:120: ++TmpVector;
-;	SRC/sys_timer.c:121: *TmpVector = (unsigned char) Vector;
+;	SRC/sys_timer.c:125: ++TmpVector;
+;	SRC/sys_timer.c:126: *TmpVector = (unsigned char) Vector;
 	mov	a,_bp
 	add	a,#0xfb
 	mov	r0,a
@@ -698,16 +698,16 @@ _SetVector:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'InitTimer'
 ;------------------------------------------------------------
-;	SRC/sys_timer.c:127: void InitTimer( void ) {
+;	SRC/sys_timer.c:132: void InitTimer( void ) {
 ;	-----------------------------------------
 ;	 function InitTimer
 ;	-----------------------------------------
 _InitTimer:
-;	SRC/sys_timer.c:131: TMOD = 0x01 + 0x00;//+ 0x80; //
+;	SRC/sys_timer.c:138: TMOD = 0x01 + 0x00;
 	mov	_TMOD,#0x01
-;	SRC/sys_timer.c:132: TCON = 0x10 + 0x01; //+ 0x04; //    
+;	SRC/sys_timer.c:139: TCON = 0x10 + 0x01;
 	mov	_TCON,#0x11
-;	SRC/sys_timer.c:134: SetVector( 0x200B, (void *)T0_ISR );
+;	SRC/sys_timer.c:142: SetVector( 0x200B, (void *)T0_ISR );
 	mov	r5,#_T0_ISR
 	mov	r6,#(_T0_ISR >> 8)
 	mov	r7,#0x80
@@ -719,7 +719,7 @@ _InitTimer:
 	dec	sp
 	dec	sp
 	dec	sp
-;	SRC/sys_timer.c:136: SetVector( 0x2003, (void *)INT0_handler );
+;	SRC/sys_timer.c:144: SetVector( 0x2003, (void *)INT0_handler );
 	mov	r5,#_INT0_handler
 	mov	r6,#(_INT0_handler >> 8)
 	mov	r7,#0x80
@@ -731,7 +731,7 @@ _InitTimer:
 	dec	sp
 	dec	sp
 	dec	sp
-;	SRC/sys_timer.c:139: SetVector( 0x202B, (void *)T2_handler );
+;	SRC/sys_timer.c:147: SetVector( 0x202B, (void *)T2_handler );
 	mov	r5,#_T2_handler
 	mov	r6,#(_T2_handler >> 8)
 	mov	r7,#0x80
@@ -743,23 +743,23 @@ _InitTimer:
 	dec	sp
 	dec	sp
 	dec	sp
-;	SRC/sys_timer.c:141: ET0 = 1;
+;	SRC/sys_timer.c:149: ET0 = 1;
 	setb	_ET0
-;	SRC/sys_timer.c:143: EX0 = 1;    //INT0 inteerupt enable
+;	SRC/sys_timer.c:151: EX0 = 1;    //INT0 inteerupt enable
 	setb	_EX0
-;	SRC/sys_timer.c:148: PT2 = 1;        // Timer 2 high priority
+;	SRC/sys_timer.c:156: PT2 = 1;        // Timer 2 high priority
 	setb	_PT2
-;	SRC/sys_timer.c:149: PT0 = 0;        // Timer 0 low priority
+;	SRC/sys_timer.c:157: PT0 = 0;        // Timer 0 low priority
 	clr	_PT0
-;	SRC/sys_timer.c:150: TR2 = 1;        // Timer 2 start
+;	SRC/sys_timer.c:158: TR2 = 1;        // Timer 2 start
 	setb	_TR2
-;	SRC/sys_timer.c:151: TH2 = 0xFB;     // Timer 2 high byte
+;	SRC/sys_timer.c:159: TH2 = 0xFB;     // Timer 2 high byte
 	mov	_TH2,#0xFB
-;	SRC/sys_timer.c:152: TL2 = 0xC2;     // Timer 2 low byte
+;	SRC/sys_timer.c:160: TL2 = 0xC2;     // Timer 2 low byte
 	mov	_TL2,#0xC2
-;	SRC/sys_timer.c:153: ET2 = 1;        // Timer 2 enable interrupts
+;	SRC/sys_timer.c:161: ET2 = 1;        // Timer 2 enable interrupts
 	setb	_ET2
-;	SRC/sys_timer.c:154: EA = 1;         // Enable global interrupts
+;	SRC/sys_timer.c:162: EA = 1;         // Enable global interrupts
 	setb	_EA
 	ret
 	.area CSEG    (CODE)

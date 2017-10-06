@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-; This file was generated Fri Oct 06 15:21:33 2017
+; This file was generated Fri Oct 06 15:30:29 2017
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mmcs51 --model-small
@@ -10,7 +10,9 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _DelayMs
 	.globl _InitTimer
+	.globl _anim_m
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -136,6 +138,13 @@ _main:
 	lcall	_InitTimer
 ;	SRC/main.c:11: while( 1 ) {
 00102$:
+;	SRC/main.c:12: anim_m();
+	lcall	_anim_m
+;	SRC/main.c:13: DelayMs(300);
+	mov	dptr,#0x012C
+	clr	a
+	mov	b,a
+	lcall	_DelayMs
 	sjmp	00102$
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

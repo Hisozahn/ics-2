@@ -96,7 +96,12 @@ void T2_handler ( void ) __interrupt (5) {
 
 void INT0_handler ( void ) __interrupt (0) {
     leds(0x55);
+    //__systime += 1000;
 }
+//void INT1_handler ( void ) __interrupt (2) {
+//    leds(0xF5);
+    //__systime += 1000;
+//}
 
 //////////////////////// SetVector //////////////////////////
 // Функция, устанавливающая вектор прерывания в
@@ -128,8 +133,11 @@ void InitTimer( void ) {
     
 	//TH0 = 0xFB; // Инициализация таймера 0
 	//TL0 = 0xC2; //
-	TMOD = 0x01 + 0x00;//+ 0x80; //
-	TCON = 0x10 + 0x01; //+ 0x04; //    
+	//TMOD = 0x01 + 0x00;//+ 0x80; //
+	//TCON = 0x10 + 0x05; //+ 0x04; //    
+    TMOD = 0x01 + 0x00;
+    TCON = 0x10 + 0x01;
+    
 	// Установка вектора в пользовательской таблице
 	SetVector( 0x200B, (void *)T0_ISR );
     //SetVector( 0x201B, (void *)T1_ISR );
@@ -141,7 +149,7 @@ void InitTimer( void ) {
 	ET0 = 1;
     //ET1 = 1;
     EX0 = 1;    //INT0 inteerupt enable
-    
+    //EX1 = 1;
     //RCAP2H = 0xFB; // Timer 2 autoreload value high byte
     //RCAP2L = 0xC2; // Timer 2 autoreload value low byte
     

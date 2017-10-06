@@ -399,7 +399,7 @@
                             399 ;	-----------------------------------------
                             400 ;	 function write_max
                             401 ;	-----------------------------------------
-   2453                     402 _write_max:
+   248C                     402 _write_max:
                     0007    403 	ar7 = 0x07
                     0006    404 	ar6 = 0x06
                     0005    405 	ar5 = 0x05
@@ -408,22 +408,22 @@
                     0002    408 	ar2 = 0x02
                     0001    409 	ar1 = 0x01
                     0000    410 	ar0 = 0x00
-   2453 C0 19               411 	push	_bp
-   2455 85 81 19            412 	mov	_bp,sp
+   248C C0 19               411 	push	_bp
+   248E 85 81 19            412 	mov	_bp,sp
                             413 ;	SRC/max.c:52: unsigned char oldDPP = DPP;
                             414 ;	SRC/max.c:54: DPP     = MAXBASE;
                             415 ;	SRC/max.c:55: *regnum = val;
-   2458 AD 84               416 	mov	r5,_DPP
-   245A 75 84 08            417 	mov	_DPP,#0x08
-   245D E5 19               418 	mov	a,_bp
-   245F 24 FD               419 	add	a,#0xfd
-   2461 F8                  420 	mov	r0,a
-   2462 E6                  421 	mov	a,@r0
-   2463 F0                  422 	movx	@dptr,a
+   2491 AD 84               416 	mov	r5,_DPP
+   2493 75 84 08            417 	mov	_DPP,#0x08
+   2496 E5 19               418 	mov	a,_bp
+   2498 24 FD               419 	add	a,#0xfd
+   249A F8                  420 	mov	r0,a
+   249B E6                  421 	mov	a,@r0
+   249C F0                  422 	movx	@dptr,a
                             423 ;	SRC/max.c:56: DPP     = oldDPP;
-   2464 8D 84               424 	mov	_DPP,r5
-   2466 D0 19               425 	pop	_bp
-   2468 22                  426 	ret
+   249D 8D 84               424 	mov	_DPP,r5
+   249F D0 19               425 	pop	_bp
+   24A1 22                  426 	ret
                             427 ;------------------------------------------------------------
                             428 ;Allocation info for local variables in function 'read_max'
                             429 ;------------------------------------------------------------
@@ -435,19 +435,19 @@
                             435 ;	-----------------------------------------
                             436 ;	 function read_max
                             437 ;	-----------------------------------------
-   2469                     438 _read_max:
+   24A2                     438 _read_max:
                             439 ;	SRC/max.c:74: unsigned char oldDPP=DPP;
                             440 ;	SRC/max.c:77: DPP = MAXBASE;
                             441 ;	SRC/max.c:78: val = *regnum;
-   2469 AD 84               442 	mov	r5,_DPP
-   246B 75 84 08            443 	mov	_DPP,#0x08
-   246E E0                  444 	movx	a,@dptr
-   246F FE                  445 	mov	r6,a
+   24A2 AD 84               442 	mov	r5,_DPP
+   24A4 75 84 08            443 	mov	_DPP,#0x08
+   24A7 E0                  444 	movx	a,@dptr
+   24A8 FE                  445 	mov	r6,a
                             446 ;	SRC/max.c:79: DPP = oldDPP;
-   2470 8D 84               447 	mov	_DPP,r5
+   24A9 8D 84               447 	mov	_DPP,r5
                             448 ;	SRC/max.c:81: return val;
-   2472 8E 82               449 	mov	dpl,r6
-   2474 22                  450 	ret
+   24AB 8E 82               449 	mov	dpl,r6
+   24AD 22                  450 	ret
                             451 	.area CSEG    (CODE)
                             452 	.area CONST   (CODE)
                             453 	.area XINIT   (CODE)

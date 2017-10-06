@@ -67,7 +67,7 @@ CABS                                00000000    00000000 =           0. bytes (A
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
 C:   00000100  l_IRAM                          
-C:   00000631  l_CSEG                          
+C:   0000066A  l_CSEG                          
 C:   00002100  s_HOME                          
 C:   00002113  s_GSINIT0                       
 C:   00002116  s_GSINIT1                       
@@ -78,8 +78,8 @@ C:   0000216C  s_GSINIT
 C:   0000216C  s_GSINIT5                       
 C:   000021A0  s_GSFINAL                       
 C:   000021A3  s_CSEG                          
-C:   000027D4  s_CONST                         
-C:   000027D6  s_XINIT                         
+C:   0000280D  s_CONST                         
+C:   0000280F  s_XINIT                         
 C:   00006000  s_PSEG                          
 C:   00006000  s_XISEG                         
 C:   00006000  s_XSEG                          
@@ -396,43 +396,43 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                000021A3    00000631 =        1585. bytes (REL,CON,CODE)
+CSEG                                000021A3    0000066A =        1642. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
 C:   000021A3  _main                              main
-C:   000021A8  _GetMsCounter                      sys_timer
-C:   000021BC  _DTimeMs                           sys_timer
-C:   000021F1  _DelayMs                           sys_timer
-C:   0000224E  _T2_handler                        sys_timer
-C:   00002271  _INT0_handler                      sys_timer
-C:   000022B3  _SetVector                         sys_timer
-C:   000022EB  _InitTimer                         sys_timer
-C:   0000234E  _led                               led
-C:   00002391  _leds                              led
-C:   000023A4  _WriteLED                          led
-C:   000023B1  _T0_ISR                            led
-C:   00002404  _SetBrightness                     led
-C:   0000242C  _SetBrightnesses                   led
-C:   00002453  _write_max                         max
-C:   00002469  _read_max                          max
-C:   00002475  _SetSnake                          anim
-C:   000025D6  _anim_m                            anim
-C:   0000268D  _abs                               abs
-C:   0000269A  _memcpy                            _memcpy
-C:   0000272D  __gptrget                          _gptrget
-C:   00002749  __divsint                          _divsint
-C:   00002786  __divuint                          _divuint
-C:   00002790  __divint                           _divuint
-C:   000027B7  __sdcc_external_startup            _startup
-C:   000027BB  __gptrput                          _gptrput
+C:   000021B4  _GetMsCounter                      sys_timer
+C:   000021C8  _DTimeMs                           sys_timer
+C:   000021FD  _DelayMs                           sys_timer
+C:   0000225A  _T2_handler                        sys_timer
+C:   0000227D  _INT0_handler                      sys_timer
+C:   000022BF  _SetVector                         sys_timer
+C:   000022F7  _InitTimer                         sys_timer
+C:   0000235A  _led                               led
+C:   0000239D  _leds                              led
+C:   000023B0  _WriteLED                          led
+C:   000023BD  _T0_ISR                            led
+C:   00002431  _SetBrightness                     led
+C:   00002459  _SetBrightnesses                   led
+C:   0000248C  _write_max                         max
+C:   000024A2  _read_max                          max
+C:   000024AE  _SetSnake                          anim
+C:   0000260F  _anim_m                            anim
+C:   000026C6  _abs                               abs
+C:   000026D3  _memcpy                            _memcpy
+C:   00002766  __gptrget                          _gptrget
+C:   00002782  __divsint                          _divsint
+C:   000027BF  __divuint                          _divuint
+C:   000027C9  __divint                           _divuint
+C:   000027F0  __sdcc_external_startup            _startup
+C:   000027F4  __gptrput                          _gptrput
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000027D4    00000002 =           2. bytes (REL,CON,CODE)
+CONST                               0000280D    00000002 =           2. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-                              4 ; This file was generated Fri Oct 06 15:18:23 2017
+                              4 ; This file was generated Fri Oct 06 16:12:22 2017
                               5 ;--------------------------------------------------------
                               6 	.module sys_timer
                               7 	.optsdcc -mmcs51 --model-small
@@ -427,7 +427,7 @@
                             427 ;	-----------------------------------------
                             428 ;	 function GetMsCounter
                             429 ;	-----------------------------------------
-   21A8                     430 _GetMsCounter:
+   21B4                     430 _GetMsCounter:
                     0007    431 	ar7 = 0x07
                     0006    432 	ar6 = 0x06
                     0005    433 	ar5 = 0x05
@@ -437,20 +437,20 @@
                     0001    437 	ar1 = 0x01
                     0000    438 	ar0 = 0x00
                             439 ;	SRC/sys_timer.c:29: ET2 = 0; 
-   21A8 C2 AD               440 	clr	_ET2
+   21B4 C2 AD               440 	clr	_ET2
                             441 ;	SRC/sys_timer.c:30: res = __systime; 
-   21AA AC 08               442 	mov	r4,___systime
-   21AC AD 09               443 	mov	r5,(___systime + 1)
-   21AE AE 0A               444 	mov	r6,(___systime + 2)
-   21B0 AF 0B               445 	mov	r7,(___systime + 3)
+   21B6 AC 08               442 	mov	r4,___systime
+   21B8 AD 09               443 	mov	r5,(___systime + 1)
+   21BA AE 0A               444 	mov	r6,(___systime + 2)
+   21BC AF 0B               445 	mov	r7,(___systime + 3)
                             446 ;	SRC/sys_timer.c:31: ET2 = 1; 
-   21B2 D2 AD               447 	setb	_ET2
+   21BE D2 AD               447 	setb	_ET2
                             448 ;	SRC/sys_timer.c:32: return res; 
-   21B4 8C 82               449 	mov	dpl,r4
-   21B6 8D 83               450 	mov	dph,r5
-   21B8 8E F0               451 	mov	b,r6
-   21BA EF                  452 	mov	a,r7
-   21BB 22                  453 	ret
+   21C0 8C 82               449 	mov	dpl,r4
+   21C2 8D 83               450 	mov	dph,r5
+   21C4 8E F0               451 	mov	b,r6
+   21C6 EF                  452 	mov	a,r7
+   21C7 22                  453 	ret
                             454 ;------------------------------------------------------------
                             455 ;Allocation info for local variables in function 'DTimeMs'
                             456 ;------------------------------------------------------------
@@ -461,43 +461,43 @@
                             461 ;	-----------------------------------------
                             462 ;	 function DTimeMs
                             463 ;	-----------------------------------------
-   21BC                     464 _DTimeMs:
-   21BC C0 19               465 	push	_bp
-   21BE 85 81 19            466 	mov	_bp,sp
-   21C1 C0 82               467 	push	dpl
-   21C3 C0 83               468 	push	dph
-   21C5 C0 F0               469 	push	b
-   21C7 C0 E0               470 	push	acc
+   21C8                     464 _DTimeMs:
+   21C8 C0 19               465 	push	_bp
+   21CA 85 81 19            466 	mov	_bp,sp
+   21CD C0 82               467 	push	dpl
+   21CF C0 83               468 	push	dph
+   21D1 C0 F0               469 	push	b
+   21D3 C0 E0               470 	push	acc
                             471 ;	SRC/sys_timer.c:37: unsigned long t1 = ( unsigned long )GetMsCounter(); 
-   21C9 12 21 A8            472 	lcall	_GetMsCounter
-   21CC AA 82               473 	mov	r2,dpl
-   21CE AB 83               474 	mov	r3,dph
-   21D0 AE F0               475 	mov	r6,b
-   21D2 FF                  476 	mov	r7,a
+   21D5 12 21 B4            472 	lcall	_GetMsCounter
+   21D8 AA 82               473 	mov	r2,dpl
+   21DA AB 83               474 	mov	r3,dph
+   21DC AE F0               475 	mov	r6,b
+   21DE FF                  476 	mov	r7,a
                             477 ;	SRC/sys_timer.c:38: return t1 - t2;   
-   21D3 A8 19               478 	mov	r0,_bp
-   21D5 08                  479 	inc	r0
-   21D6 EA                  480 	mov	a,r2
-   21D7 C3                  481 	clr	c
-   21D8 96                  482 	subb	a,@r0
-   21D9 FA                  483 	mov	r2,a
-   21DA EB                  484 	mov	a,r3
-   21DB 08                  485 	inc	r0
-   21DC 96                  486 	subb	a,@r0
-   21DD FB                  487 	mov	r3,a
-   21DE EE                  488 	mov	a,r6
-   21DF 08                  489 	inc	r0
-   21E0 96                  490 	subb	a,@r0
-   21E1 FE                  491 	mov	r6,a
-   21E2 EF                  492 	mov	a,r7
-   21E3 08                  493 	inc	r0
-   21E4 96                  494 	subb	a,@r0
-   21E5 8A 82               495 	mov	dpl,r2
-   21E7 8B 83               496 	mov	dph,r3
-   21E9 8E F0               497 	mov	b,r6
-   21EB 85 19 81            498 	mov	sp,_bp
-   21EE D0 19               499 	pop	_bp
-   21F0 22                  500 	ret
+   21DF A8 19               478 	mov	r0,_bp
+   21E1 08                  479 	inc	r0
+   21E2 EA                  480 	mov	a,r2
+   21E3 C3                  481 	clr	c
+   21E4 96                  482 	subb	a,@r0
+   21E5 FA                  483 	mov	r2,a
+   21E6 EB                  484 	mov	a,r3
+   21E7 08                  485 	inc	r0
+   21E8 96                  486 	subb	a,@r0
+   21E9 FB                  487 	mov	r3,a
+   21EA EE                  488 	mov	a,r6
+   21EB 08                  489 	inc	r0
+   21EC 96                  490 	subb	a,@r0
+   21ED FE                  491 	mov	r6,a
+   21EE EF                  492 	mov	a,r7
+   21EF 08                  493 	inc	r0
+   21F0 96                  494 	subb	a,@r0
+   21F1 8A 82               495 	mov	dpl,r2
+   21F3 8B 83               496 	mov	dph,r3
+   21F5 8E F0               497 	mov	b,r6
+   21F7 85 19 81            498 	mov	sp,_bp
+   21FA D0 19               499 	pop	_bp
+   21FC 22                  500 	ret
                             501 ;------------------------------------------------------------
                             502 ;Allocation info for local variables in function 'DelayMs'
                             503 ;------------------------------------------------------------
@@ -508,68 +508,68 @@
                             508 ;	-----------------------------------------
                             509 ;	 function DelayMs
                             510 ;	-----------------------------------------
-   21F1                     511 _DelayMs:
-   21F1 C0 19               512 	push	_bp
-   21F3 85 81 19            513 	mov	_bp,sp
-   21F6 C0 82               514 	push	dpl
-   21F8 C0 83               515 	push	dph
-   21FA C0 F0               516 	push	b
-   21FC C0 E0               517 	push	acc
-   21FE E5 81               518 	mov	a,sp
-   2200 24 04               519 	add	a,#0x04
-   2202 F5 81               520 	mov	sp,a
+   21FD                     511 _DelayMs:
+   21FD C0 19               512 	push	_bp
+   21FF 85 81 19            513 	mov	_bp,sp
+   2202 C0 82               514 	push	dpl
+   2204 C0 83               515 	push	dph
+   2206 C0 F0               516 	push	b
+   2208 C0 E0               517 	push	acc
+   220A E5 81               518 	mov	a,sp
+   220C 24 04               519 	add	a,#0x04
+   220E F5 81               520 	mov	sp,a
                             521 ;	SRC/sys_timer.c:43: unsigned long t1 = ( unsigned long )GetMsCounter(); 
-   2204 12 21 A8            522 	lcall	_GetMsCounter
-   2207 AF 82               523 	mov	r7,dpl
-   2209 AE 83               524 	mov	r6,dph
-   220B AD F0               525 	mov	r5,b
-   220D FC                  526 	mov	r4,a
-   220E E5 19               527 	mov	a,_bp
-   2210 24 05               528 	add	a,#0x05
-   2212 F8                  529 	mov	r0,a
-   2213 A6 07               530 	mov	@r0,ar7
-   2215 08                  531 	inc	r0
-   2216 A6 06               532 	mov	@r0,ar6
-   2218 08                  533 	inc	r0
-   2219 A6 05               534 	mov	@r0,ar5
-   221B 08                  535 	inc	r0
-   221C A6 04               536 	mov	@r0,ar4
+   2210 12 21 B4            522 	lcall	_GetMsCounter
+   2213 AF 82               523 	mov	r7,dpl
+   2215 AE 83               524 	mov	r6,dph
+   2217 AD F0               525 	mov	r5,b
+   2219 FC                  526 	mov	r4,a
+   221A E5 19               527 	mov	a,_bp
+   221C 24 05               528 	add	a,#0x05
+   221E F8                  529 	mov	r0,a
+   221F A6 07               530 	mov	@r0,ar7
+   2221 08                  531 	inc	r0
+   2222 A6 06               532 	mov	@r0,ar6
+   2224 08                  533 	inc	r0
+   2225 A6 05               534 	mov	@r0,ar5
+   2227 08                  535 	inc	r0
+   2228 A6 04               536 	mov	@r0,ar4
                             537 ;	SRC/sys_timer.c:44: while ( 1 ) 
-   221E                     538 00104$:
+   222A                     538 00104$:
                             539 ;	SRC/sys_timer.c:46: if ( DTimeMs( t1 ) > ms ) break; 
-   221E E5 19               540 	mov	a,_bp
-   2220 24 05               541 	add	a,#0x05
-   2222 F8                  542 	mov	r0,a
-   2223 86 82               543 	mov	dpl,@r0
-   2225 08                  544 	inc	r0
-   2226 86 83               545 	mov	dph,@r0
-   2228 08                  546 	inc	r0
-   2229 86 F0               547 	mov	b,@r0
-   222B 08                  548 	inc	r0
-   222C E6                  549 	mov	a,@r0
-   222D 12 21 BC            550 	lcall	_DTimeMs
-   2230 AC 82               551 	mov	r4,dpl
-   2232 AD 83               552 	mov	r5,dph
-   2234 AE F0               553 	mov	r6,b
-   2236 FF                  554 	mov	r7,a
-   2237 A8 19               555 	mov	r0,_bp
-   2239 08                  556 	inc	r0
-   223A C3                  557 	clr	c
-   223B E6                  558 	mov	a,@r0
-   223C 9C                  559 	subb	a,r4
-   223D 08                  560 	inc	r0
-   223E E6                  561 	mov	a,@r0
-   223F 9D                  562 	subb	a,r5
-   2240 08                  563 	inc	r0
-   2241 E6                  564 	mov	a,@r0
-   2242 9E                  565 	subb	a,r6
-   2243 08                  566 	inc	r0
-   2244 E6                  567 	mov	a,@r0
-   2245 9F                  568 	subb	a,r7
-   2246 50 D6               569 	jnc	00104$
-   2248 85 19 81            570 	mov	sp,_bp
-   224B D0 19               571 	pop	_bp
-   224D 22                  572 	ret
+   222A E5 19               540 	mov	a,_bp
+   222C 24 05               541 	add	a,#0x05
+   222E F8                  542 	mov	r0,a
+   222F 86 82               543 	mov	dpl,@r0
+   2231 08                  544 	inc	r0
+   2232 86 83               545 	mov	dph,@r0
+   2234 08                  546 	inc	r0
+   2235 86 F0               547 	mov	b,@r0
+   2237 08                  548 	inc	r0
+   2238 E6                  549 	mov	a,@r0
+   2239 12 21 C8            550 	lcall	_DTimeMs
+   223C AC 82               551 	mov	r4,dpl
+   223E AD 83               552 	mov	r5,dph
+   2240 AE F0               553 	mov	r6,b
+   2242 FF                  554 	mov	r7,a
+   2243 A8 19               555 	mov	r0,_bp
+   2245 08                  556 	inc	r0
+   2246 C3                  557 	clr	c
+   2247 E6                  558 	mov	a,@r0
+   2248 9C                  559 	subb	a,r4
+   2249 08                  560 	inc	r0
+   224A E6                  561 	mov	a,@r0
+   224B 9D                  562 	subb	a,r5
+   224C 08                  563 	inc	r0
+   224D E6                  564 	mov	a,@r0
+   224E 9E                  565 	subb	a,r6
+   224F 08                  566 	inc	r0
+   2250 E6                  567 	mov	a,@r0
+   2251 9F                  568 	subb	a,r7
+   2252 50 D6               569 	jnc	00104$
+   2254 85 19 81            570 	mov	sp,_bp
+   2257 D0 19               571 	pop	_bp
+   2259 22                  572 	ret
                             573 ;------------------------------------------------------------
                             574 ;Allocation info for local variables in function 'T2_handler'
                             575 ;------------------------------------------------------------
@@ -577,28 +577,28 @@
                             577 ;	-----------------------------------------
                             578 ;	 function T2_handler
                             579 ;	-----------------------------------------
-   224E                     580 _T2_handler:
-   224E C0 E0               581 	push	acc
-   2250 C0 D0               582 	push	psw
+   225A                     580 _T2_handler:
+   225A C0 E0               581 	push	acc
+   225C C0 D0               582 	push	psw
                             583 ;	SRC/sys_timer.c:87: TF2 = 0;
-   2252 C2 CF               584 	clr	_TF2
+   225E C2 CF               584 	clr	_TF2
                             585 ;	SRC/sys_timer.c:88: __systime++;
-   2254 05 08               586 	inc	___systime
-   2256 E4                  587 	clr	a
-   2257 B5 08 0C            588 	cjne	a,___systime,00103$
-   225A 05 09               589 	inc	(___systime + 1)
-   225C B5 09 07            590 	cjne	a,(___systime + 1),00103$
-   225F 05 0A               591 	inc	(___systime + 2)
-   2261 B5 0A 02            592 	cjne	a,(___systime + 2),00103$
-   2264 05 0B               593 	inc	(___systime + 3)
-   2266                     594 00103$:
+   2260 05 08               586 	inc	___systime
+   2262 E4                  587 	clr	a
+   2263 B5 08 0C            588 	cjne	a,___systime,00103$
+   2266 05 09               589 	inc	(___systime + 1)
+   2268 B5 09 07            590 	cjne	a,(___systime + 1),00103$
+   226B 05 0A               591 	inc	(___systime + 2)
+   226D B5 0A 02            592 	cjne	a,(___systime + 2),00103$
+   2270 05 0B               593 	inc	(___systime + 3)
+   2272                     594 00103$:
                             595 ;	SRC/sys_timer.c:89: TH2 = 0xFB;
-   2266 75 CD FB            596 	mov	_TH2,#0xFB
+   2272 75 CD FB            596 	mov	_TH2,#0xFB
                             597 ;	SRC/sys_timer.c:90: TL2 = 0xC3;
-   2269 75 CC C3            598 	mov	_TL2,#0xC3
-   226C D0 D0               599 	pop	psw
-   226E D0 E0               600 	pop	acc
-   2270 32                  601 	reti
+   2275 75 CC C3            598 	mov	_TL2,#0xC3
+   2278 D0 D0               599 	pop	psw
+   227A D0 E0               600 	pop	acc
+   227C 32                  601 	reti
                             602 ;	eliminated unneeded mov psw,# (no regs used in bank)
                             603 ;	eliminated unneeded push/pop dpl
                             604 ;	eliminated unneeded push/pop dph
@@ -610,40 +610,40 @@
                             610 ;	-----------------------------------------
                             611 ;	 function INT0_handler
                             612 ;	-----------------------------------------
-   2271                     613 _INT0_handler:
-   2271 C0 20               614 	push	bits
-   2273 C0 E0               615 	push	acc
-   2275 C0 F0               616 	push	b
-   2277 C0 82               617 	push	dpl
-   2279 C0 83               618 	push	dph
-   227B C0 07               619 	push	(0+7)
-   227D C0 06               620 	push	(0+6)
-   227F C0 05               621 	push	(0+5)
-   2281 C0 04               622 	push	(0+4)
-   2283 C0 03               623 	push	(0+3)
-   2285 C0 02               624 	push	(0+2)
-   2287 C0 01               625 	push	(0+1)
-   2289 C0 00               626 	push	(0+0)
-   228B C0 D0               627 	push	psw
-   228D 75 D0 00            628 	mov	psw,#0x00
+   227D                     613 _INT0_handler:
+   227D C0 20               614 	push	bits
+   227F C0 E0               615 	push	acc
+   2281 C0 F0               616 	push	b
+   2283 C0 82               617 	push	dpl
+   2285 C0 83               618 	push	dph
+   2287 C0 07               619 	push	(0+7)
+   2289 C0 06               620 	push	(0+6)
+   228B C0 05               621 	push	(0+5)
+   228D C0 04               622 	push	(0+4)
+   228F C0 03               623 	push	(0+3)
+   2291 C0 02               624 	push	(0+2)
+   2293 C0 01               625 	push	(0+1)
+   2295 C0 00               626 	push	(0+0)
+   2297 C0 D0               627 	push	psw
+   2299 75 D0 00            628 	mov	psw,#0x00
                             629 ;	SRC/sys_timer.c:98: leds(0x55);
-   2290 75 82 55            630 	mov	dpl,#0x55
-   2293 12 23 91            631 	lcall	_leds
-   2296 D0 D0               632 	pop	psw
-   2298 D0 00               633 	pop	(0+0)
-   229A D0 01               634 	pop	(0+1)
-   229C D0 02               635 	pop	(0+2)
-   229E D0 03               636 	pop	(0+3)
-   22A0 D0 04               637 	pop	(0+4)
-   22A2 D0 05               638 	pop	(0+5)
-   22A4 D0 06               639 	pop	(0+6)
-   22A6 D0 07               640 	pop	(0+7)
-   22A8 D0 83               641 	pop	dph
-   22AA D0 82               642 	pop	dpl
-   22AC D0 F0               643 	pop	b
-   22AE D0 E0               644 	pop	acc
-   22B0 D0 20               645 	pop	bits
-   22B2 32                  646 	reti
+   229C 75 82 55            630 	mov	dpl,#0x55
+   229F 12 23 9D            631 	lcall	_leds
+   22A2 D0 D0               632 	pop	psw
+   22A4 D0 00               633 	pop	(0+0)
+   22A6 D0 01               634 	pop	(0+1)
+   22A8 D0 02               635 	pop	(0+2)
+   22AA D0 03               636 	pop	(0+3)
+   22AC D0 04               637 	pop	(0+4)
+   22AE D0 05               638 	pop	(0+5)
+   22B0 D0 06               639 	pop	(0+6)
+   22B2 D0 07               640 	pop	(0+7)
+   22B4 D0 83               641 	pop	dph
+   22B6 D0 82               642 	pop	dpl
+   22B8 D0 F0               643 	pop	b
+   22BA D0 E0               644 	pop	acc
+   22BC D0 20               645 	pop	bits
+   22BE 32                  646 	reti
                             647 ;------------------------------------------------------------
                             648 ;Allocation info for local variables in function 'SetVector'
                             649 ;------------------------------------------------------------
@@ -651,117 +651,117 @@
                             651 ;Address                   Allocated to registers r6 r7 
                             652 ;TmpVector                 Allocated to registers r6 r7 
                             653 ;------------------------------------------------------------
-                            654 ;	SRC/sys_timer.c:110: void SetVector(unsigned char __xdata * Address, void * Vector)
+                            654 ;	SRC/sys_timer.c:115: void SetVector(unsigned char __xdata * Address, void * Vector)
                             655 ;	-----------------------------------------
                             656 ;	 function SetVector
                             657 ;	-----------------------------------------
-   22B3                     658 _SetVector:
-   22B3 C0 19               659 	push	_bp
-   22B5 85 81 19            660 	mov	_bp,sp
-                            661 ;	SRC/sys_timer.c:116: *Address = 0x02;
-   22B8 AE 82               662 	mov	r6,dpl
-   22BA AF 83               663 	mov  r7,dph
-   22BC 74 02               664 	mov	a,#0x02
-   22BE F0                  665 	movx	@dptr,a
-                            666 ;	SRC/sys_timer.c:118: TmpVector = (unsigned char __xdata *) (Address + 1);
-   22BF 0E                  667 	inc	r6
-   22C0 BE 00 01            668 	cjne	r6,#0x00,00103$
-   22C3 0F                  669 	inc	r7
-   22C4                     670 00103$:
-                            671 ;	SRC/sys_timer.c:119: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
-   22C4 E5 19               672 	mov	a,_bp
-   22C6 24 FB               673 	add	a,#0xfb
-   22C8 F8                  674 	mov	r0,a
-   22C9 86 04               675 	mov	ar4,@r0
-   22CB 08                  676 	inc	r0
-   22CC 86 05               677 	mov	ar5,@r0
-   22CE 8D 04               678 	mov	ar4,r5
-   22D0 8E 82               679 	mov	dpl,r6
-   22D2 8F 83               680 	mov	dph,r7
-   22D4 EC                  681 	mov	a,r4
-   22D5 F0                  682 	movx	@dptr,a
-   22D6 A3                  683 	inc	dptr
-   22D7 AE 82               684 	mov	r6,dpl
-   22D9 AF 83               685 	mov	r7,dph
-                            686 ;	SRC/sys_timer.c:120: ++TmpVector;
-                            687 ;	SRC/sys_timer.c:121: *TmpVector = (unsigned char) Vector;
-   22DB E5 19               688 	mov	a,_bp
-   22DD 24 FB               689 	add	a,#0xfb
-   22DF F8                  690 	mov	r0,a
-   22E0 86 05               691 	mov	ar5,@r0
-   22E2 8E 82               692 	mov	dpl,r6
-   22E4 8F 83               693 	mov	dph,r7
-   22E6 ED                  694 	mov	a,r5
-   22E7 F0                  695 	movx	@dptr,a
-   22E8 D0 19               696 	pop	_bp
-   22EA 22                  697 	ret
+   22BF                     658 _SetVector:
+   22BF C0 19               659 	push	_bp
+   22C1 85 81 19            660 	mov	_bp,sp
+                            661 ;	SRC/sys_timer.c:121: *Address = 0x02;
+   22C4 AE 82               662 	mov	r6,dpl
+   22C6 AF 83               663 	mov  r7,dph
+   22C8 74 02               664 	mov	a,#0x02
+   22CA F0                  665 	movx	@dptr,a
+                            666 ;	SRC/sys_timer.c:123: TmpVector = (unsigned char __xdata *) (Address + 1);
+   22CB 0E                  667 	inc	r6
+   22CC BE 00 01            668 	cjne	r6,#0x00,00103$
+   22CF 0F                  669 	inc	r7
+   22D0                     670 00103$:
+                            671 ;	SRC/sys_timer.c:124: *TmpVector = (unsigned char) ((unsigned short)Vector >> 8);
+   22D0 E5 19               672 	mov	a,_bp
+   22D2 24 FB               673 	add	a,#0xfb
+   22D4 F8                  674 	mov	r0,a
+   22D5 86 04               675 	mov	ar4,@r0
+   22D7 08                  676 	inc	r0
+   22D8 86 05               677 	mov	ar5,@r0
+   22DA 8D 04               678 	mov	ar4,r5
+   22DC 8E 82               679 	mov	dpl,r6
+   22DE 8F 83               680 	mov	dph,r7
+   22E0 EC                  681 	mov	a,r4
+   22E1 F0                  682 	movx	@dptr,a
+   22E2 A3                  683 	inc	dptr
+   22E3 AE 82               684 	mov	r6,dpl
+   22E5 AF 83               685 	mov	r7,dph
+                            686 ;	SRC/sys_timer.c:125: ++TmpVector;
+                            687 ;	SRC/sys_timer.c:126: *TmpVector = (unsigned char) Vector;
+   22E7 E5 19               688 	mov	a,_bp
+   22E9 24 FB               689 	add	a,#0xfb
+   22EB F8                  690 	mov	r0,a
+   22EC 86 05               691 	mov	ar5,@r0
+   22EE 8E 82               692 	mov	dpl,r6
+   22F0 8F 83               693 	mov	dph,r7
+   22F2 ED                  694 	mov	a,r5
+   22F3 F0                  695 	movx	@dptr,a
+   22F4 D0 19               696 	pop	_bp
+   22F6 22                  697 	ret
                             698 ;------------------------------------------------------------
                             699 ;Allocation info for local variables in function 'InitTimer'
                             700 ;------------------------------------------------------------
-                            701 ;	SRC/sys_timer.c:127: void InitTimer( void ) {
+                            701 ;	SRC/sys_timer.c:132: void InitTimer( void ) {
                             702 ;	-----------------------------------------
                             703 ;	 function InitTimer
                             704 ;	-----------------------------------------
-   22EB                     705 _InitTimer:
-                            706 ;	SRC/sys_timer.c:131: TMOD = 0x01 + 0x00;//+ 0x80; //
-   22EB 75 89 01            707 	mov	_TMOD,#0x01
-                            708 ;	SRC/sys_timer.c:132: TCON = 0x10 + 0x01; //+ 0x04; //    
-   22EE 75 88 11            709 	mov	_TCON,#0x11
-                            710 ;	SRC/sys_timer.c:134: SetVector( 0x200B, (void *)T0_ISR );
-   22F1 7D B1               711 	mov	r5,#_T0_ISR
-   22F3 7E 23               712 	mov	r6,#(_T0_ISR >> 8)
-   22F5 7F 80               713 	mov	r7,#0x80
-   22F7 C0 05               714 	push	ar5
-   22F9 C0 06               715 	push	ar6
-   22FB C0 07               716 	push	ar7
-   22FD 90 20 0B            717 	mov	dptr,#0x200B
-   2300 12 22 B3            718 	lcall	_SetVector
-   2303 15 81               719 	dec	sp
-   2305 15 81               720 	dec	sp
-   2307 15 81               721 	dec	sp
-                            722 ;	SRC/sys_timer.c:136: SetVector( 0x2003, (void *)INT0_handler );
-   2309 7D 71               723 	mov	r5,#_INT0_handler
-   230B 7E 22               724 	mov	r6,#(_INT0_handler >> 8)
-   230D 7F 80               725 	mov	r7,#0x80
-   230F C0 05               726 	push	ar5
-   2311 C0 06               727 	push	ar6
-   2313 C0 07               728 	push	ar7
-   2315 90 20 03            729 	mov	dptr,#0x2003
-   2318 12 22 B3            730 	lcall	_SetVector
-   231B 15 81               731 	dec	sp
-   231D 15 81               732 	dec	sp
-   231F 15 81               733 	dec	sp
-                            734 ;	SRC/sys_timer.c:139: SetVector( 0x202B, (void *)T2_handler );
-   2321 7D 4E               735 	mov	r5,#_T2_handler
-   2323 7E 22               736 	mov	r6,#(_T2_handler >> 8)
-   2325 7F 80               737 	mov	r7,#0x80
-   2327 C0 05               738 	push	ar5
-   2329 C0 06               739 	push	ar6
-   232B C0 07               740 	push	ar7
-   232D 90 20 2B            741 	mov	dptr,#0x202B
-   2330 12 22 B3            742 	lcall	_SetVector
-   2333 15 81               743 	dec	sp
-   2335 15 81               744 	dec	sp
-   2337 15 81               745 	dec	sp
-                            746 ;	SRC/sys_timer.c:141: ET0 = 1;
-   2339 D2 A9               747 	setb	_ET0
-                            748 ;	SRC/sys_timer.c:143: EX0 = 1;    //INT0 inteerupt enable
-   233B D2 A8               749 	setb	_EX0
-                            750 ;	SRC/sys_timer.c:148: PT2 = 1;        // Timer 2 high priority
-   233D D2 BD               751 	setb	_PT2
-                            752 ;	SRC/sys_timer.c:149: PT0 = 0;        // Timer 0 low priority
-   233F C2 B9               753 	clr	_PT0
-                            754 ;	SRC/sys_timer.c:150: TR2 = 1;        // Timer 2 start
-   2341 D2 CA               755 	setb	_TR2
-                            756 ;	SRC/sys_timer.c:151: TH2 = 0xFB;     // Timer 2 high byte
-   2343 75 CD FB            757 	mov	_TH2,#0xFB
-                            758 ;	SRC/sys_timer.c:152: TL2 = 0xC2;     // Timer 2 low byte
-   2346 75 CC C2            759 	mov	_TL2,#0xC2
-                            760 ;	SRC/sys_timer.c:153: ET2 = 1;        // Timer 2 enable interrupts
-   2349 D2 AD               761 	setb	_ET2
-                            762 ;	SRC/sys_timer.c:154: EA = 1;         // Enable global interrupts
-   234B D2 AF               763 	setb	_EA
-   234D 22                  764 	ret
+   22F7                     705 _InitTimer:
+                            706 ;	SRC/sys_timer.c:138: TMOD = 0x01 + 0x00;
+   22F7 75 89 01            707 	mov	_TMOD,#0x01
+                            708 ;	SRC/sys_timer.c:139: TCON = 0x10 + 0x01;
+   22FA 75 88 11            709 	mov	_TCON,#0x11
+                            710 ;	SRC/sys_timer.c:142: SetVector( 0x200B, (void *)T0_ISR );
+   22FD 7D BD               711 	mov	r5,#_T0_ISR
+   22FF 7E 23               712 	mov	r6,#(_T0_ISR >> 8)
+   2301 7F 80               713 	mov	r7,#0x80
+   2303 C0 05               714 	push	ar5
+   2305 C0 06               715 	push	ar6
+   2307 C0 07               716 	push	ar7
+   2309 90 20 0B            717 	mov	dptr,#0x200B
+   230C 12 22 BF            718 	lcall	_SetVector
+   230F 15 81               719 	dec	sp
+   2311 15 81               720 	dec	sp
+   2313 15 81               721 	dec	sp
+                            722 ;	SRC/sys_timer.c:144: SetVector( 0x2003, (void *)INT0_handler );
+   2315 7D 7D               723 	mov	r5,#_INT0_handler
+   2317 7E 22               724 	mov	r6,#(_INT0_handler >> 8)
+   2319 7F 80               725 	mov	r7,#0x80
+   231B C0 05               726 	push	ar5
+   231D C0 06               727 	push	ar6
+   231F C0 07               728 	push	ar7
+   2321 90 20 03            729 	mov	dptr,#0x2003
+   2324 12 22 BF            730 	lcall	_SetVector
+   2327 15 81               731 	dec	sp
+   2329 15 81               732 	dec	sp
+   232B 15 81               733 	dec	sp
+                            734 ;	SRC/sys_timer.c:147: SetVector( 0x202B, (void *)T2_handler );
+   232D 7D 5A               735 	mov	r5,#_T2_handler
+   232F 7E 22               736 	mov	r6,#(_T2_handler >> 8)
+   2331 7F 80               737 	mov	r7,#0x80
+   2333 C0 05               738 	push	ar5
+   2335 C0 06               739 	push	ar6
+   2337 C0 07               740 	push	ar7
+   2339 90 20 2B            741 	mov	dptr,#0x202B
+   233C 12 22 BF            742 	lcall	_SetVector
+   233F 15 81               743 	dec	sp
+   2341 15 81               744 	dec	sp
+   2343 15 81               745 	dec	sp
+                            746 ;	SRC/sys_timer.c:149: ET0 = 1;
+   2345 D2 A9               747 	setb	_ET0
+                            748 ;	SRC/sys_timer.c:151: EX0 = 1;    //INT0 inteerupt enable
+   2347 D2 A8               749 	setb	_EX0
+                            750 ;	SRC/sys_timer.c:156: PT2 = 1;        // Timer 2 high priority
+   2349 D2 BD               751 	setb	_PT2
+                            752 ;	SRC/sys_timer.c:157: PT0 = 0;        // Timer 0 low priority
+   234B C2 B9               753 	clr	_PT0
+                            754 ;	SRC/sys_timer.c:158: TR2 = 1;        // Timer 2 start
+   234D D2 CA               755 	setb	_TR2
+                            756 ;	SRC/sys_timer.c:159: TH2 = 0xFB;     // Timer 2 high byte
+   234F 75 CD FB            757 	mov	_TH2,#0xFB
+                            758 ;	SRC/sys_timer.c:160: TL2 = 0xC2;     // Timer 2 low byte
+   2352 75 CC C2            759 	mov	_TL2,#0xC2
+                            760 ;	SRC/sys_timer.c:161: ET2 = 1;        // Timer 2 enable interrupts
+   2355 D2 AD               761 	setb	_ET2
+                            762 ;	SRC/sys_timer.c:162: EA = 1;         // Enable global interrupts
+   2357 D2 AF               763 	setb	_EA
+   2359 22                  764 	ret
                             765 	.area CSEG    (CODE)
                             766 	.area CONST   (CODE)
                             767 	.area XINIT   (CODE)

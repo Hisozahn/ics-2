@@ -133,7 +133,7 @@ void T0_ISR( void ) __interrupt ( 1 )
 		mask <<= 1;
 	}
 	tick++;
-	//leds(led);
+	leds(led);
 	TH0 = 0xFF;
 	TL0 = 0xF0;
 }
@@ -151,9 +151,10 @@ void SetBrightness(unsigned char ledId, unsigned char b) {
 }
 
 void SetBrightnesses(const unsigned char* brigthness_v) {
+    char old_ET0 = ET0;
 	ET0 = 0;
 	memcpy(brightness, brigthness_v, LED_COUNT);
-	ET0 = 1;
+	ET0 = old_ET0;
 }
 
 

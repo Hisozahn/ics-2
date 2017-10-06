@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-                              4 ; This file was generated Fri Oct 06 15:21:33 2017
+                              4 ; This file was generated Fri Oct 06 15:30:29 2017
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mmcs51 --model-small
@@ -10,134 +10,143 @@
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
                              12 	.globl _main
-                             13 	.globl _InitTimer
-                             14 ;--------------------------------------------------------
-                             15 ; special function registers
+                             13 	.globl _DelayMs
+                             14 	.globl _InitTimer
+                             15 	.globl _anim_m
                              16 ;--------------------------------------------------------
-                             17 	.area RSEG    (ABS,DATA)
-   0000                      18 	.org 0x0000
-                             19 ;--------------------------------------------------------
-                             20 ; special function bits
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 	.area RSEG    (ABS,DATA)
+   0000                      20 	.org 0x0000
                              21 ;--------------------------------------------------------
-                             22 	.area RSEG    (ABS,DATA)
-   0000                      23 	.org 0x0000
-                             24 ;--------------------------------------------------------
-                             25 ; overlayable register banks
+                             22 ; special function bits
+                             23 ;--------------------------------------------------------
+                             24 	.area RSEG    (ABS,DATA)
+   0000                      25 	.org 0x0000
                              26 ;--------------------------------------------------------
-                             27 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                      28 	.ds 8
-                             29 ;--------------------------------------------------------
-                             30 ; internal ram data
+                             27 ; overlayable register banks
+                             28 ;--------------------------------------------------------
+                             29 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      30 	.ds 8
                              31 ;--------------------------------------------------------
-                             32 	.area DSEG    (DATA)
+                             32 ; internal ram data
                              33 ;--------------------------------------------------------
-                             34 ; overlayable items in internal ram 
+                             34 	.area DSEG    (DATA)
                              35 ;--------------------------------------------------------
-                             36 ;--------------------------------------------------------
-                             37 ; Stack segment in internal ram 
+                             36 ; overlayable items in internal ram 
+                             37 ;--------------------------------------------------------
                              38 ;--------------------------------------------------------
-                             39 	.area	SSEG	(DATA)
-   0000                      40 __start__stack:
-   0000                      41 	.ds	1
-                             42 
-                             43 ;--------------------------------------------------------
-                             44 ; indirectly addressable internal ram data
+                             39 ; Stack segment in internal ram 
+                             40 ;--------------------------------------------------------
+                             41 	.area	SSEG	(DATA)
+   0000                      42 __start__stack:
+   0000                      43 	.ds	1
+                             44 
                              45 ;--------------------------------------------------------
-                             46 	.area ISEG    (DATA)
+                             46 ; indirectly addressable internal ram data
                              47 ;--------------------------------------------------------
-                             48 ; absolute internal ram data
+                             48 	.area ISEG    (DATA)
                              49 ;--------------------------------------------------------
-                             50 	.area IABS    (ABS,DATA)
-                             51 	.area IABS    (ABS,DATA)
-                             52 ;--------------------------------------------------------
-                             53 ; bit data
+                             50 ; absolute internal ram data
+                             51 ;--------------------------------------------------------
+                             52 	.area IABS    (ABS,DATA)
+                             53 	.area IABS    (ABS,DATA)
                              54 ;--------------------------------------------------------
-                             55 	.area BSEG    (BIT)
+                             55 ; bit data
                              56 ;--------------------------------------------------------
-                             57 ; paged external ram data
+                             57 	.area BSEG    (BIT)
                              58 ;--------------------------------------------------------
-                             59 	.area PSEG    (PAG,XDATA)
+                             59 ; paged external ram data
                              60 ;--------------------------------------------------------
-                             61 ; external ram data
+                             61 	.area PSEG    (PAG,XDATA)
                              62 ;--------------------------------------------------------
-                             63 	.area XSEG    (XDATA)
+                             63 ; external ram data
                              64 ;--------------------------------------------------------
-                             65 ; absolute external ram data
+                             65 	.area XSEG    (XDATA)
                              66 ;--------------------------------------------------------
-                             67 	.area XABS    (ABS,XDATA)
+                             67 ; absolute external ram data
                              68 ;--------------------------------------------------------
-                             69 ; external initialized ram data
+                             69 	.area XABS    (ABS,XDATA)
                              70 ;--------------------------------------------------------
-                             71 	.area XISEG   (XDATA)
-                             72 	.area HOME    (CODE)
-                             73 	.area GSINIT0 (CODE)
-                             74 	.area GSINIT1 (CODE)
-                             75 	.area GSINIT2 (CODE)
-                             76 	.area GSINIT3 (CODE)
-                             77 	.area GSINIT4 (CODE)
-                             78 	.area GSINIT5 (CODE)
-                             79 	.area GSINIT  (CODE)
-                             80 	.area GSFINAL (CODE)
-                             81 	.area CSEG    (CODE)
-                             82 ;--------------------------------------------------------
-                             83 ; interrupt vector 
+                             71 ; external initialized ram data
+                             72 ;--------------------------------------------------------
+                             73 	.area XISEG   (XDATA)
+                             74 	.area HOME    (CODE)
+                             75 	.area GSINIT0 (CODE)
+                             76 	.area GSINIT1 (CODE)
+                             77 	.area GSINIT2 (CODE)
+                             78 	.area GSINIT3 (CODE)
+                             79 	.area GSINIT4 (CODE)
+                             80 	.area GSINIT5 (CODE)
+                             81 	.area GSINIT  (CODE)
+                             82 	.area GSFINAL (CODE)
+                             83 	.area CSEG    (CODE)
                              84 ;--------------------------------------------------------
-                             85 	.area HOME    (CODE)
-   0000                      86 __interrupt_vect:
-   0000 02s00r00             87 	ljmp	__sdcc_gsinit_startup
-   0003 32                   88 	reti
-   0004                      89 	.ds	7
-   000B 02s00r00             90 	ljmp	_T0_ISR
-                             91 ;--------------------------------------------------------
-                             92 ; global & static initialisations
+                             85 ; interrupt vector 
+                             86 ;--------------------------------------------------------
+                             87 	.area HOME    (CODE)
+   0000                      88 __interrupt_vect:
+   0000 02s00r00             89 	ljmp	__sdcc_gsinit_startup
+   0003 32                   90 	reti
+   0004                      91 	.ds	7
+   000B 02s00r00             92 	ljmp	_T0_ISR
                              93 ;--------------------------------------------------------
-                             94 	.area HOME    (CODE)
-                             95 	.area GSINIT  (CODE)
-                             96 	.area GSFINAL (CODE)
+                             94 ; global & static initialisations
+                             95 ;--------------------------------------------------------
+                             96 	.area HOME    (CODE)
                              97 	.area GSINIT  (CODE)
-                             98 	.globl __sdcc_gsinit_startup
-                             99 	.globl __sdcc_program_startup
-                            100 	.globl __start__stack
-                            101 	.globl __mcs51_genXINIT
-                            102 	.globl __mcs51_genXRAMCLEAR
-                            103 	.globl __mcs51_genRAMCLEAR
-                            104 	.area GSFINAL (CODE)
-   0000 02s00r0E            105 	ljmp	__sdcc_program_startup
-                            106 ;--------------------------------------------------------
-                            107 ; Home
+                             98 	.area GSFINAL (CODE)
+                             99 	.area GSINIT  (CODE)
+                            100 	.globl __sdcc_gsinit_startup
+                            101 	.globl __sdcc_program_startup
+                            102 	.globl __start__stack
+                            103 	.globl __mcs51_genXINIT
+                            104 	.globl __mcs51_genXRAMCLEAR
+                            105 	.globl __mcs51_genRAMCLEAR
+                            106 	.area GSFINAL (CODE)
+   0000 02s00r0E            107 	ljmp	__sdcc_program_startup
                             108 ;--------------------------------------------------------
-                            109 	.area HOME    (CODE)
-                            110 	.area HOME    (CODE)
-   000E                     111 __sdcc_program_startup:
-   000E 12s00r00            112 	lcall	_main
-                            113 ;	return from main will lock up
-   0011 80 FE               114 	sjmp .
-                            115 ;--------------------------------------------------------
-                            116 ; code
+                            109 ; Home
+                            110 ;--------------------------------------------------------
+                            111 	.area HOME    (CODE)
+                            112 	.area HOME    (CODE)
+   000E                     113 __sdcc_program_startup:
+   000E 12s00r00            114 	lcall	_main
+                            115 ;	return from main will lock up
+   0011 80 FE               116 	sjmp .
                             117 ;--------------------------------------------------------
-                            118 	.area CSEG    (CODE)
-                            119 ;------------------------------------------------------------
-                            120 ;Allocation info for local variables in function 'main'
+                            118 ; code
+                            119 ;--------------------------------------------------------
+                            120 	.area CSEG    (CODE)
                             121 ;------------------------------------------------------------
-                            122 ;	SRC/main.c:8: void main( void )
-                            123 ;	-----------------------------------------
-                            124 ;	 function main
+                            122 ;Allocation info for local variables in function 'main'
+                            123 ;------------------------------------------------------------
+                            124 ;	SRC/main.c:8: void main( void )
                             125 ;	-----------------------------------------
-   0000                     126 _main:
-                    0007    127 	ar7 = 0x07
-                    0006    128 	ar6 = 0x06
-                    0005    129 	ar5 = 0x05
-                    0004    130 	ar4 = 0x04
-                    0003    131 	ar3 = 0x03
-                    0002    132 	ar2 = 0x02
-                    0001    133 	ar1 = 0x01
-                    0000    134 	ar0 = 0x00
-                            135 ;	SRC/main.c:10: InitTimer();
-   0000 12s00r00            136 	lcall	_InitTimer
-                            137 ;	SRC/main.c:11: while( 1 ) {
-   0003                     138 00102$:
-   0003 80 FE               139 	sjmp	00102$
-                            140 	.area CSEG    (CODE)
-                            141 	.area CONST   (CODE)
-                            142 	.area XINIT   (CODE)
-                            143 	.area CABS    (ABS,CODE)
+                            126 ;	 function main
+                            127 ;	-----------------------------------------
+   0000                     128 _main:
+                    0007    129 	ar7 = 0x07
+                    0006    130 	ar6 = 0x06
+                    0005    131 	ar5 = 0x05
+                    0004    132 	ar4 = 0x04
+                    0003    133 	ar3 = 0x03
+                    0002    134 	ar2 = 0x02
+                    0001    135 	ar1 = 0x01
+                    0000    136 	ar0 = 0x00
+                            137 ;	SRC/main.c:10: InitTimer();
+   0000 12s00r00            138 	lcall	_InitTimer
+                            139 ;	SRC/main.c:11: while( 1 ) {
+   0003                     140 00102$:
+                            141 ;	SRC/main.c:12: anim_m();
+   0003 12s00r00            142 	lcall	_anim_m
+                            143 ;	SRC/main.c:13: DelayMs(300);
+   0006 90 01 2C            144 	mov	dptr,#0x012C
+   0009 E4                  145 	clr	a
+   000A F5 F0               146 	mov	b,a
+   000C 12s00r00            147 	lcall	_DelayMs
+   000F 80 F2               148 	sjmp	00102$
+                            149 	.area CSEG    (CODE)
+                            150 	.area CONST   (CODE)
+                            151 	.area XINIT   (CODE)
+                            152 	.area CABS    (ABS,CODE)

@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
-; This file was generated Fri Oct 06 15:21:33 2017
+; This file was generated Fri Oct 06 16:01:05 2017
 ;--------------------------------------------------------
 	.module led
 	.optsdcc -mmcs51 --model-small
@@ -335,6 +335,20 @@ _SPR0	=	0x00f8
 	.area REG_BANK_0	(REL,OVR,DATA)
 	.ds 8
 ;--------------------------------------------------------
+; overlayable bit register bank
+;--------------------------------------------------------
+	.area BIT_BANK	(REL,OVR,DATA)
+bits:
+	.ds 1
+	b0 = bits[0]
+	b1 = bits[1]
+	b2 = bits[2]
+	b3 = bits[3]
+	b4 = bits[4]
+	b5 = bits[5]
+	b6 = bits[6]
+	b7 = bits[7]
+;--------------------------------------------------------
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
@@ -536,12 +550,19 @@ _WriteLED:
 ;	 function T0_ISR
 ;	-----------------------------------------
 _T0_ISR:
+	push	bits
 	push	acc
-	push	ar7
-	push	ar6
-	push	ar5
-	push	ar4
-	push	ar1
+	push	b
+	push	dpl
+	push	dph
+	push	(0+7)
+	push	(0+6)
+	push	(0+5)
+	push	(0+4)
+	push	(0+3)
+	push	(0+2)
+	push	(0+1)
+	push	(0+0)
 	push	psw
 	mov	psw,#0x00
 ;	SRC/led.c:123: unsigned char led = 0;
@@ -588,22 +609,28 @@ _T0_ISR:
 00108$:
 ;	SRC/led.c:135: tick++;
 	inc	_tick
+;	SRC/led.c:136: leds(led);
+	mov	dpl,r7
+	lcall	_leds
 ;	SRC/led.c:137: TH0 = 0xFF;
 	mov	_TH0,#0xFF
 ;	SRC/led.c:138: TL0 = 0xF0;
 	mov	_TL0,#0xF0
 	pop	psw
-	pop	ar1
-	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
+	pop	(0+0)
+	pop	(0+1)
+	pop	(0+2)
+	pop	(0+3)
+	pop	(0+4)
+	pop	(0+5)
+	pop	(0+6)
+	pop	(0+7)
+	pop	dph
+	pop	dpl
+	pop	b
 	pop	acc
+	pop	bits
 	reti
-;	eliminated unneeded push/pop ar0
-;	eliminated unneeded push/pop dpl
-;	eliminated unneeded push/pop dph
-;	eliminated unneeded push/pop b
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'SetBrightness'
 ;------------------------------------------------------------
@@ -651,6 +678,7 @@ _SetBrightness:
 ;Allocation info for local variables in function 'SetBrightnesses'
 ;------------------------------------------------------------
 ;brigthness_v              Allocated to registers r5 r6 r7 
+;old_ET0                   Allocated to registers r4 
 ;------------------------------------------------------------
 ;	SRC/led.c:153: void SetBrightnesses(const unsigned char* brigthness_v) {
 ;	-----------------------------------------
@@ -660,9 +688,15 @@ _SetBrightnesses:
 	mov	r5,dpl
 	mov	r6,dph
 	mov	r7,b
-;	SRC/led.c:154: ET0 = 0;
+;	SRC/led.c:154: char old_ET0 = ET0;
+	mov	c,_ET0
+	clr	a
+	rlc	a
+	mov	r4,a
+;	SRC/led.c:155: ET0 = 0;
 	clr	_ET0
-;	SRC/led.c:155: memcpy(brightness, brigthness_v, LED_COUNT);
+;	SRC/led.c:156: memcpy(brightness, brigthness_v, LED_COUNT);
+	push	ar4
 	mov	a,#0x08
 	push	acc
 	clr	a
@@ -676,8 +710,11 @@ _SetBrightnesses:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-;	SRC/led.c:156: ET0 = 1;
-	setb	_ET0
+	pop	ar4
+;	SRC/led.c:157: ET0 = old_ET0;
+	mov	a,r4
+	add	a,#0xff
+	mov	_ET0,c
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

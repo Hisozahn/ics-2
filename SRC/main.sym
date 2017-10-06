@@ -179,6 +179,7 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
+    _DelayMs                                                       **** GX
     _InitTimer                                                     **** GX
     _T0_ISR                                                        **** GX
   E __interrupt_vect                                               0000 R
@@ -188,6 +189,7 @@ Symbol Table
     __sdcc_gsinit_startup                                          **** GX
   E __sdcc_program_startup                                         000E GR
   6 __start__stack                                                 0000 GR
+    _anim_m                                                        **** GX
  17 _main                                                          0000 GR
     a                                                              00E0 
     a.0                                                            00E0 
@@ -401,7 +403,7 @@ Area Table
   14 GSINIT5                                    size    0   flags 20
   15 GSINIT                                     size    0   flags 20
   16 GSFINAL                                    size    3   flags 20
-  17 CSEG                                       size    5   flags 20
+  17 CSEG                                       size   11   flags 20
   18 CONST                                      size    0   flags 20
   19 XINIT                                      size    0   flags 20
   1A CABS                                       size    0   flags 28

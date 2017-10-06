@@ -1,9 +1,11 @@
 XH
-H 1B areas A global symbols
+H 1B areas C global symbols
 M main
 O -mmcs51 --model-small
 S __mcs51_genRAMCLEAR Ref0000
 S __mcs51_genXINIT Ref0000
+S _DelayMs Ref0000
+S _anim_m Ref0000
 S .__.ABS. Def0000
 S __mcs51_genXRAMCLEAR Ref0000
 S _T0_ISR Ref0000
@@ -34,7 +36,7 @@ A GSINIT4 size 0 flags 20 addr 0
 A GSINIT5 size 0 flags 20 addr 0
 A GSINIT size 0 flags 20 addr 0
 A GSFINAL size 3 flags 20 addr 0
-A CSEG size 5 flags 20 addr 0
+A CSEG size 11 flags 20 addr 0
 S _main Def0000
 A CONST size 0 flags 20 addr 0
 A XINIT size 0 flags 20 addr 0
@@ -52,11 +54,11 @@ R 00 00 00 06
 T 00 00
 R 00 00 00 0E
 T 00 00 02 00 00 32
-R 00 00 00 0E 02 03 00 06
+R 00 00 00 0E 02 03 00 08
 T 00 04
 R 00 00 00 0E
 T 00 0B 02 00 00
-R 00 00 00 0E 02 03 00 04
+R 00 00 00 0E 02 03 00 06
 T 00 00 02 00 0E
 R 00 00 00 16 00 03 00 0E
 T 00 0E
@@ -66,8 +68,8 @@ R 00 00 00 0E 00 03 00 17
 T 00 00
 R 00 00 00 17
 T 00 00 12 00 00
-R 00 00 00 17 02 03 00 05
+R 00 00 00 17 02 03 00 07
 T 00 03
 R 00 00 00 17
-T 00 03 80 FE
-R 00 00 00 17
+T 00 03 12 00 00 90 01 2C E4 F5 F0 12 00 00 80 F2
+R 00 00 00 17 02 03 00 03 02 0C 00 02
