@@ -1,0 +1,513 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.2.0 #8008 (Jul  6 2012) (MINGW32)
+                              4 ; This file was generated Fri Oct 06 13:33:45 2017
+                              5 ;--------------------------------------------------------
+                              6 	.module anim
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _SetSnake
+                             13 	.globl _abs
+                             14 	.globl _SetBrightnesses
+                             15 	.globl _anim_m
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 	.area RSEG    (ABS,DATA)
+   0000                      20 	.org 0x0000
+                             21 ;--------------------------------------------------------
+                             22 ; special function bits
+                             23 ;--------------------------------------------------------
+                             24 	.area RSEG    (ABS,DATA)
+   0000                      25 	.org 0x0000
+                             26 ;--------------------------------------------------------
+                             27 ; overlayable register banks
+                             28 ;--------------------------------------------------------
+                             29 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      30 	.ds 8
+                             31 ;--------------------------------------------------------
+                             32 ; internal ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area DSEG    (DATA)
+   0000                      35 _anim_m_head_1_32:
+   0000                      36 	.ds 1
+   0001                      37 _anim_m_tail_1_32:
+   0001                      38 	.ds 1
+   0002                      39 _anim_m_direction_1_32:
+   0002                      40 	.ds 1
+                             41 ;--------------------------------------------------------
+                             42 ; overlayable items in internal ram 
+                             43 ;--------------------------------------------------------
+                             44 ;--------------------------------------------------------
+                             45 ; indirectly addressable internal ram data
+                             46 ;--------------------------------------------------------
+                             47 	.area ISEG    (DATA)
+                             48 ;--------------------------------------------------------
+                             49 ; absolute internal ram data
+                             50 ;--------------------------------------------------------
+                             51 	.area IABS    (ABS,DATA)
+                             52 	.area IABS    (ABS,DATA)
+                             53 ;--------------------------------------------------------
+                             54 ; bit data
+                             55 ;--------------------------------------------------------
+                             56 	.area BSEG    (BIT)
+                             57 ;--------------------------------------------------------
+                             58 ; paged external ram data
+                             59 ;--------------------------------------------------------
+                             60 	.area PSEG    (PAG,XDATA)
+                             61 ;--------------------------------------------------------
+                             62 ; external ram data
+                             63 ;--------------------------------------------------------
+                             64 	.area XSEG    (XDATA)
+                             65 ;--------------------------------------------------------
+                             66 ; absolute external ram data
+                             67 ;--------------------------------------------------------
+                             68 	.area XABS    (ABS,XDATA)
+                             69 ;--------------------------------------------------------
+                             70 ; external initialized ram data
+                             71 ;--------------------------------------------------------
+                             72 	.area XISEG   (XDATA)
+                             73 	.area HOME    (CODE)
+                             74 	.area GSINIT0 (CODE)
+                             75 	.area GSINIT1 (CODE)
+                             76 	.area GSINIT2 (CODE)
+                             77 	.area GSINIT3 (CODE)
+                             78 	.area GSINIT4 (CODE)
+                             79 	.area GSINIT5 (CODE)
+                             80 	.area GSINIT  (CODE)
+                             81 	.area GSFINAL (CODE)
+                             82 	.area CSEG    (CODE)
+                             83 ;--------------------------------------------------------
+                             84 ; global & static initialisations
+                             85 ;--------------------------------------------------------
+                             86 	.area HOME    (CODE)
+                             87 	.area GSINIT  (CODE)
+                             88 	.area GSFINAL (CODE)
+                             89 	.area GSINIT  (CODE)
+                             90 ;------------------------------------------------------------
+                             91 ;Allocation info for local variables in function 'anim_m'
+                             92 ;------------------------------------------------------------
+                             93 ;head                      Allocated with name '_anim_m_head_1_32'
+                             94 ;tail                      Allocated with name '_anim_m_tail_1_32'
+                             95 ;direction                 Allocated with name '_anim_m_direction_1_32'
+                             96 ;------------------------------------------------------------
+                             97 ;	SRC/anim.c:36: static char head = 5;
+   0000 75*00 05             98 	mov	_anim_m_head_1_32,#0x05
+                             99 ;	SRC/anim.c:37: static char tail = 0;
+   0003 75*01 00            100 	mov	_anim_m_tail_1_32,#0x00
+                            101 ;	SRC/anim.c:38: static char direction = RIGHT;
+   0006 90s00r01            102 	mov	dptr,#_anim_m_RIGHT_1_32
+   0009 E4                  103 	clr	a
+   000A 93                  104 	movc	a,@a+dptr
+   000B F5*02               105 	mov	_anim_m_direction_1_32,a
+                            106 ;--------------------------------------------------------
+                            107 ; Home
+                            108 ;--------------------------------------------------------
+                            109 	.area HOME    (CODE)
+                            110 	.area HOME    (CODE)
+                            111 ;--------------------------------------------------------
+                            112 ; code
+                            113 ;--------------------------------------------------------
+                            114 	.area CSEG    (CODE)
+                            115 ;------------------------------------------------------------
+                            116 ;Allocation info for local variables in function 'SetSnake'
+                            117 ;------------------------------------------------------------
+                            118 ;tail                      Allocated to stack - _bp -3
+                            119 ;head                      Allocated to registers r7 
+                            120 ;delta_brightness          Allocated to stack - _bp +1
+                            121 ;i                         Allocated to registers r6 
+                            122 ;segment_index             Allocated to registers r2 
+                            123 ;brigthness_v              Allocated to stack - _bp +2
+                            124 ;------------------------------------------------------------
+                            125 ;	SRC/anim.c:4: void SetSnake(char head, char tail) {
+                            126 ;	-----------------------------------------
+                            127 ;	 function SetSnake
+                            128 ;	-----------------------------------------
+   0000                     129 _SetSnake:
+                    0007    130 	ar7 = 0x07
+                    0006    131 	ar6 = 0x06
+                    0005    132 	ar5 = 0x05
+                    0004    133 	ar4 = 0x04
+                    0003    134 	ar3 = 0x03
+                    0002    135 	ar2 = 0x02
+                    0001    136 	ar1 = 0x01
+                    0000    137 	ar0 = 0x00
+   0000 C0*00               138 	push	_bp
+   0002 E5 81               139 	mov	a,sp
+   0004 F5*00               140 	mov	_bp,a
+   0006 24 09               141 	add	a,#0x09
+   0008 F5 81               142 	mov	sp,a
+   000A AF 82               143 	mov	r7,dpl
+                            144 ;	SRC/anim.c:6: char delta_brightness = 100 / ( abs(tail - head) + 1 );
+   000C E5*00               145 	mov	a,_bp
+   000E 24 FD               146 	add	a,#0xfd
+   0010 F8                  147 	mov	r0,a
+   0011 86 05               148 	mov	ar5,@r0
+   0013 E6                  149 	mov	a,@r0
+   0014 33                  150 	rlc	a
+   0015 95 E0               151 	subb	a,acc
+   0017 FE                  152 	mov	r6,a
+   0018 EF                  153 	mov	a,r7
+   0019 FB                  154 	mov	r3,a
+   001A 33                  155 	rlc	a
+   001B 95 E0               156 	subb	a,acc
+   001D FC                  157 	mov	r4,a
+   001E ED                  158 	mov	a,r5
+   001F C3                  159 	clr	c
+   0020 9B                  160 	subb	a,r3
+   0021 F5 82               161 	mov	dpl,a
+   0023 EE                  162 	mov	a,r6
+   0024 9C                  163 	subb	a,r4
+   0025 F5 83               164 	mov	dph,a
+   0027 C0 07               165 	push	ar7
+   0029 C0 04               166 	push	ar4
+   002B C0 03               167 	push	ar3
+   002D 12s00r00            168 	lcall	_abs
+   0030 E5 82               169 	mov	a,dpl
+   0032 85 83 F0            170 	mov	b,dph
+   0035 24 01               171 	add	a,#0x01
+   0037 FD                  172 	mov	r5,a
+   0038 E4                  173 	clr	a
+   0039 35 F0               174 	addc	a,b
+   003B FE                  175 	mov	r6,a
+   003C C0 05               176 	push	ar5
+   003E C0 06               177 	push	ar6
+   0040 90 00 64            178 	mov	dptr,#0x0064
+   0043 12s00r00            179 	lcall	__divsint
+   0046 AD 82               180 	mov	r5,dpl
+   0048 AE 83               181 	mov	r6,dph
+   004A 15 81               182 	dec	sp
+   004C 15 81               183 	dec	sp
+   004E D0 03               184 	pop	ar3
+   0050 D0 04               185 	pop	ar4
+   0052 D0 07               186 	pop	ar7
+   0054 A8*00               187 	mov	r0,_bp
+   0056 08                  188 	inc	r0
+   0057 A6 05               189 	mov	@r0,ar5
+                            190 ;	SRC/anim.c:9: unsigned char brigthness_v[LED_COUNT] = { 0 };
+   0059 E5*00               191 	mov	a,_bp
+   005B 24 02               192 	add	a,#0x02
+   005D F9                  193 	mov	r1,a
+   005E 77 00               194 	mov	@r1,#0x00
+   0060 E9                  195 	mov	a,r1
+   0061 04                  196 	inc	a
+   0062 F8                  197 	mov	r0,a
+   0063 76 00               198 	mov	@r0,#0x00
+   0065 74 02               199 	mov	a,#0x02
+   0067 29                  200 	add	a,r1
+   0068 F8                  201 	mov	r0,a
+   0069 76 00               202 	mov	@r0,#0x00
+   006B 74 03               203 	mov	a,#0x03
+   006D 29                  204 	add	a,r1
+   006E F8                  205 	mov	r0,a
+   006F 76 00               206 	mov	@r0,#0x00
+   0071 74 04               207 	mov	a,#0x04
+   0073 29                  208 	add	a,r1
+   0074 F8                  209 	mov	r0,a
+   0075 76 00               210 	mov	@r0,#0x00
+   0077 74 05               211 	mov	a,#0x05
+   0079 29                  212 	add	a,r1
+   007A F8                  213 	mov	r0,a
+   007B 76 00               214 	mov	@r0,#0x00
+   007D 74 06               215 	mov	a,#0x06
+   007F 29                  216 	add	a,r1
+   0080 F8                  217 	mov	r0,a
+   0081 76 00               218 	mov	@r0,#0x00
+   0083 74 07               219 	mov	a,#0x07
+   0085 29                  220 	add	a,r1
+   0086 F8                  221 	mov	r0,a
+   0087 76 00               222 	mov	@r0,#0x00
+                            223 ;	SRC/anim.c:11: if ( head < 0 || head > 7 || tail < 0 || tail > 7) {
+   0089 EF                  224 	mov	a,r7
+   008A 20 E7 26            225 	jb	acc.7,00101$
+   008D C3                  226 	clr	c
+   008E 74 87               227 	mov	a,#(0x07 ^ 0x80)
+   0090 8F F0               228 	mov	b,r7
+   0092 63 F0 80            229 	xrl	b,#0x80
+   0095 95 F0               230 	subb	a,b
+   0097 40 1A               231 	jc	00101$
+   0099 E5*00               232 	mov	a,_bp
+   009B 24 FD               233 	add	a,#0xfd
+   009D F8                  234 	mov	r0,a
+   009E E6                  235 	mov	a,@r0
+   009F 20 E7 11            236 	jb	acc.7,00101$
+   00A2 E5*00               237 	mov	a,_bp
+   00A4 24 FD               238 	add	a,#0xfd
+   00A6 F8                  239 	mov	r0,a
+   00A7 C3                  240 	clr	c
+   00A8 74 87               241 	mov	a,#(0x07 ^ 0x80)
+   00AA 86 F0               242 	mov	b,@r0
+   00AC 63 F0 80            243 	xrl	b,#0x80
+   00AF 95 F0               244 	subb	a,b
+   00B1 50 03               245 	jnc	00102$
+   00B3                     246 00101$:
+                            247 ;	SRC/anim.c:12: return;
+   00B3 02s01r5B            248 	ljmp	00117$
+   00B6                     249 00102$:
+                            250 ;	SRC/anim.c:15: if ( head <= tail ) {
+   00B6 E5*00               251 	mov	a,_bp
+   00B8 24 FD               252 	add	a,#0xfd
+   00BA F8                  253 	mov	r0,a
+   00BB C3                  254 	clr	c
+   00BC E6                  255 	mov	a,@r0
+   00BD 64 80               256 	xrl	a,#0x80
+   00BF 8F F0               257 	mov	b,r7
+   00C1 63 F0 80            258 	xrl	b,#0x80
+   00C4 95 F0               259 	subb	a,b
+   00C6 40 33               260 	jc	00126$
+                            261 ;	SRC/anim.c:16: for (i = head; i <= tail; i++) {
+   00C8 8F 06               262 	mov	ar6,r7
+   00CA                     263 00109$:
+   00CA E5*00               264 	mov	a,_bp
+   00CC 24 FD               265 	add	a,#0xfd
+   00CE F8                  266 	mov	r0,a
+   00CF C3                  267 	clr	c
+   00D0 E6                  268 	mov	a,@r0
+   00D1 64 80               269 	xrl	a,#0x80
+   00D3 8E F0               270 	mov	b,r6
+   00D5 63 F0 80            271 	xrl	b,#0x80
+   00D8 95 F0               272 	subb	a,b
+   00DA 40 70               273 	jc	00108$
+                            274 ;	SRC/anim.c:17: segment_index = i - head;
+   00DC EE                  275 	mov	a,r6
+   00DD C3                  276 	clr	c
+   00DE 9F                  277 	subb	a,r7
+   00DF FA                  278 	mov	r2,a
+                            279 ;	SRC/anim.c:18: brigthness_v[i] = 100 - (segment_index * delta_brightness);
+   00E0 EE                  280 	mov	a,r6
+   00E1 29                  281 	add	a,r1
+   00E2 F8                  282 	mov	r0,a
+   00E3 C0 07               283 	push	ar7
+   00E5 C0 00               284 	push	ar0
+   00E7 A8*00               285 	mov	r0,_bp
+   00E9 08                  286 	inc	r0
+   00EA 86 F0               287 	mov	b,@r0
+   00EC EA                  288 	mov	a,r2
+   00ED A4                  289 	mul	ab
+   00EE FF                  290 	mov	r7,a
+   00EF D0 00               291 	pop	ar0
+   00F1 74 64               292 	mov	a,#0x64
+   00F3 C3                  293 	clr	c
+   00F4 9F                  294 	subb	a,r7
+   00F5 F6                  295 	mov	@r0,a
+                            296 ;	SRC/anim.c:16: for (i = head; i <= tail; i++) {
+   00F6 0E                  297 	inc	r6
+   00F7 D0 07               298 	pop	ar7
+                            299 ;	SRC/anim.c:22: for (i = head; i >= tail ; i--) {
+   00F9 80 CF               300 	sjmp	00109$
+   00FB                     301 00126$:
+   00FB                     302 00113$:
+   00FB E5*00               303 	mov	a,_bp
+   00FD 24 FD               304 	add	a,#0xfd
+   00FF F8                  305 	mov	r0,a
+   0100 C3                  306 	clr	c
+   0101 EF                  307 	mov	a,r7
+   0102 64 80               308 	xrl	a,#0x80
+   0104 86 F0               309 	mov	b,@r0
+   0106 63 F0 80            310 	xrl	b,#0x80
+   0109 95 F0               311 	subb	a,b
+   010B 40 3F               312 	jc	00108$
+                            313 ;	SRC/anim.c:23: segment_index = abs(i - head);
+   010D EF                  314 	mov	a,r7
+   010E FD                  315 	mov	r5,a
+   010F 33                  316 	rlc	a
+   0110 95 E0               317 	subb	a,acc
+   0112 FE                  318 	mov	r6,a
+   0113 ED                  319 	mov	a,r5
+   0114 C3                  320 	clr	c
+   0115 9B                  321 	subb	a,r3
+   0116 F5 82               322 	mov	dpl,a
+   0118 EE                  323 	mov	a,r6
+   0119 9C                  324 	subb	a,r4
+   011A F5 83               325 	mov	dph,a
+   011C C0 07               326 	push	ar7
+   011E C0 04               327 	push	ar4
+   0120 C0 03               328 	push	ar3
+   0122 C0 01               329 	push	ar1
+   0124 12s00r00            330 	lcall	_abs
+   0127 AD 82               331 	mov	r5,dpl
+   0129 AE 83               332 	mov	r6,dph
+   012B D0 01               333 	pop	ar1
+   012D D0 03               334 	pop	ar3
+   012F D0 04               335 	pop	ar4
+   0131 D0 07               336 	pop	ar7
+   0133 8D 02               337 	mov	ar2,r5
+                            338 ;	SRC/anim.c:24: brigthness_v[i] = 100 - (segment_index * delta_brightness);
+   0135 EF                  339 	mov	a,r7
+   0136 29                  340 	add	a,r1
+   0137 F8                  341 	mov	r0,a
+   0138 C0 00               342 	push	ar0
+   013A A8*00               343 	mov	r0,_bp
+   013C 08                  344 	inc	r0
+   013D 86 F0               345 	mov	b,@r0
+   013F EA                  346 	mov	a,r2
+   0140 A4                  347 	mul	ab
+   0141 FA                  348 	mov	r2,a
+   0142 D0 00               349 	pop	ar0
+   0144 74 64               350 	mov	a,#0x64
+   0146 C3                  351 	clr	c
+   0147 9A                  352 	subb	a,r2
+   0148 F6                  353 	mov	@r0,a
+                            354 ;	SRC/anim.c:22: for (i = head; i >= tail ; i--) {
+   0149 1F                  355 	dec	r7
+   014A 80 AF               356 	sjmp	00113$
+   014C                     357 00108$:
+                            358 ;	SRC/anim.c:28: SetBrightnesses(brigthness_v);
+   014C 89 07               359 	mov	ar7,r1
+   014E 7E 00               360 	mov	r6,#0x00
+   0150 7D 40               361 	mov	r5,#0x40
+   0152 8F 82               362 	mov	dpl,r7
+   0154 8E 83               363 	mov	dph,r6
+   0156 8D F0               364 	mov	b,r5
+   0158 12s00r00            365 	lcall	_SetBrightnesses
+   015B                     366 00117$:
+   015B 85*00 81            367 	mov	sp,_bp
+   015E D0*00               368 	pop	_bp
+   0160 22                  369 	ret
+                            370 ;------------------------------------------------------------
+                            371 ;Allocation info for local variables in function 'anim_m'
+                            372 ;------------------------------------------------------------
+                            373 ;head                      Allocated with name '_anim_m_head_1_32'
+                            374 ;tail                      Allocated with name '_anim_m_tail_1_32'
+                            375 ;direction                 Allocated with name '_anim_m_direction_1_32'
+                            376 ;------------------------------------------------------------
+                            377 ;	SRC/anim.c:33: void anim_m() {
+                            378 ;	-----------------------------------------
+                            379 ;	 function anim_m
+                            380 ;	-----------------------------------------
+   0161                     381 _anim_m:
+                            382 ;	SRC/anim.c:39: if (direction == RIGHT && head < 5) {
+   0161 90s00r01            383 	mov	dptr,#_anim_m_RIGHT_1_32
+   0164 E4                  384 	clr	a
+   0165 93                  385 	movc	a,@a+dptr
+   0166 FF                  386 	mov	r7,a
+   0167 B5*02 04            387 	cjne	a,_anim_m_direction_1_32,00152$
+   016A 74 01               388 	mov	a,#0x01
+   016C 80 01               389 	sjmp	00153$
+   016E                     390 00152$:
+   016E E4                  391 	clr	a
+   016F                     392 00153$:
+   016F FE                  393 	mov	r6,a
+   0170 60 0E               394 	jz	00123$
+   0172 C3                  395 	clr	c
+   0173 E5*00               396 	mov	a,_anim_m_head_1_32
+   0175 64 80               397 	xrl	a,#0x80
+   0177 94 85               398 	subb	a,#0x85
+   0179 50 05               399 	jnc	00123$
+                            400 ;	SRC/anim.c:40: ++head;
+   017B 05*00               401 	inc	_anim_m_head_1_32
+   017D 02s02r0D            402 	ljmp	00124$
+   0180                     403 00123$:
+                            404 ;	SRC/anim.c:42: else if (direction == RIGHT && head >= 5) {
+   0180 EE                  405 	mov	a,r6
+   0181 60 2F               406 	jz	00119$
+   0183 C3                  407 	clr	c
+   0184 E5*00               408 	mov	a,_anim_m_head_1_32
+   0186 64 80               409 	xrl	a,#0x80
+   0188 94 85               410 	subb	a,#0x85
+                            411 ;	SRC/anim.c:43: if (tail < LED_COUNT - 1) {
+   018A 40 26               412 	jc	00119$
+   018C E5*01               413 	mov	a,_anim_m_tail_1_32
+   018E 64 80               414 	xrl	a,#0x80
+   0190 94 87               415 	subb	a,#0x87
+   0192 50 0F               416 	jnc	00104$
+                            417 ;	SRC/anim.c:44: ++tail;
+   0194 05*01               418 	inc	_anim_m_tail_1_32
+                            419 ;	SRC/anim.c:45: if (head < LED_COUNT - 1) {
+   0196 C3                  420 	clr	c
+   0197 E5*00               421 	mov	a,_anim_m_head_1_32
+   0199 64 80               422 	xrl	a,#0x80
+   019B 94 87               423 	subb	a,#0x87
+   019D 50 6E               424 	jnc	00124$
+                            425 ;	SRC/anim.c:46: ++head;
+   019F 05*00               426 	inc	_anim_m_head_1_32
+   01A1 80 6A               427 	sjmp	00124$
+   01A3                     428 00104$:
+                            429 ;	SRC/anim.c:50: tail = LED_COUNT - 1;
+   01A3 75*01 07            430 	mov	_anim_m_tail_1_32,#0x07
+                            431 ;	SRC/anim.c:51: head = LED_COUNT - 2;
+   01A6 75*00 06            432 	mov	_anim_m_head_1_32,#0x06
+                            433 ;	SRC/anim.c:52: direction = LEFT;
+   01A9 90s00r00            434 	mov	dptr,#_anim_m_LEFT_1_32
+   01AC E4                  435 	clr	a
+   01AD 93                  436 	movc	a,@a+dptr
+   01AE F5*02               437 	mov	_anim_m_direction_1_32,a
+   01B0 80 5B               438 	sjmp	00124$
+   01B2                     439 00119$:
+                            440 ;	SRC/anim.c:55: else if (direction == LEFT && head > 2) {
+   01B2 90s00r00            441 	mov	dptr,#_anim_m_LEFT_1_32
+   01B5 E4                  442 	clr	a
+   01B6 93                  443 	movc	a,@a+dptr
+   01B7 FE                  444 	mov	r6,a
+   01B8 B5*02 04            445 	cjne	a,_anim_m_direction_1_32,00160$
+   01BB 74 01               446 	mov	a,#0x01
+   01BD 80 01               447 	sjmp	00161$
+   01BF                     448 00160$:
+   01BF E4                  449 	clr	a
+   01C0                     450 00161$:
+   01C0 FE                  451 	mov	r6,a
+   01C1 60 11               452 	jz	00115$
+   01C3 C3                  453 	clr	c
+   01C4 74 82               454 	mov	a,#(0x02 ^ 0x80)
+   01C6 85*00 F0            455 	mov	b,_anim_m_head_1_32
+   01C9 63 F0 80            456 	xrl	b,#0x80
+   01CC 95 F0               457 	subb	a,b
+   01CE 50 04               458 	jnc	00115$
+                            459 ;	SRC/anim.c:56: --head;
+   01D0 15*00               460 	dec	_anim_m_head_1_32
+   01D2 80 39               461 	sjmp	00124$
+   01D4                     462 00115$:
+                            463 ;	SRC/anim.c:58: else if (direction == LEFT && head <= 2) {
+   01D4 EE                  464 	mov	a,r6
+   01D5 60 36               465 	jz	00124$
+   01D7 C3                  466 	clr	c
+   01D8 74 82               467 	mov	a,#(0x02 ^ 0x80)
+   01DA 85*00 F0            468 	mov	b,_anim_m_head_1_32
+   01DD 63 F0 80            469 	xrl	b,#0x80
+   01E0 95 F0               470 	subb	a,b
+                            471 ;	SRC/anim.c:59: if (tail > 0) {
+   01E2 40 29               472 	jc	00124$
+   01E4 E4                  473 	clr	a
+   01E5 64 80               474 	xrl	a,#0x80
+   01E7 85*01 F0            475 	mov	b,_anim_m_tail_1_32
+   01EA 63 F0 80            476 	xrl	b,#0x80
+   01ED 95 F0               477 	subb	a,b
+   01EF 50 14               478 	jnc	00109$
+                            479 ;	SRC/anim.c:60: --tail;
+   01F1 15*01               480 	dec	_anim_m_tail_1_32
+                            481 ;	SRC/anim.c:61: if (head > 0) {
+   01F3 C3                  482 	clr	c
+   01F4 E4                  483 	clr	a
+   01F5 64 80               484 	xrl	a,#0x80
+   01F7 85*00 F0            485 	mov	b,_anim_m_head_1_32
+   01FA 63 F0 80            486 	xrl	b,#0x80
+   01FD 95 F0               487 	subb	a,b
+   01FF 50 0C               488 	jnc	00124$
+                            489 ;	SRC/anim.c:62: --head;
+   0201 15*00               490 	dec	_anim_m_head_1_32
+   0203 80 08               491 	sjmp	00124$
+   0205                     492 00109$:
+                            493 ;	SRC/anim.c:66: tail = 0;
+   0205 75*01 00            494 	mov	_anim_m_tail_1_32,#0x00
+                            495 ;	SRC/anim.c:67: head = 1;
+   0208 75*00 01            496 	mov	_anim_m_head_1_32,#0x01
+                            497 ;	SRC/anim.c:68: direction = RIGHT;
+   020B 8F*02               498 	mov	_anim_m_direction_1_32,r7
+   020D                     499 00124$:
+                            500 ;	SRC/anim.c:71: SetSnake(head, tail);
+   020D C0*01               501 	push	_anim_m_tail_1_32
+   020F 85*00 82            502 	mov	dpl,_anim_m_head_1_32
+   0212 12s00r00            503 	lcall	_SetSnake
+   0215 15 81               504 	dec	sp
+   0217 22                  505 	ret
+                            506 	.area CSEG    (CODE)
+                            507 	.area CONST   (CODE)
+   0000                     508 _anim_m_LEFT_1_32:
+   0000 00                  509 	.db #0x00	;  0
+   0001                     510 _anim_m_RIGHT_1_32:
+   0001 01                  511 	.db #0x01	;  1
+                            512 	.area XINIT   (CODE)
+                            513 	.area CABS    (ABS,CODE)

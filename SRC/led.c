@@ -117,13 +117,13 @@ void WriteLED(unsigned char value)
 unsigned char tick = 1;
 unsigned char brightness[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
 
-void T1_ISR( void ) __interrupt ( 3 )
+void T0_ISR( void ) __interrupt ( 1 )
 {	
 	unsigned char i = 0;
 	unsigned char led = 0;
 	unsigned char mask = 1;	
 	
-	if (tick > 50) {		
+	if (tick > 50) {
 		tick = 1;
 	}
 	for (; i < LED_COUNT; i++) {		
@@ -133,9 +133,9 @@ void T1_ISR( void ) __interrupt ( 3 )
 		mask <<= 1;
 	}
 	tick++;
-	leds(led);
-	TH1 = 0xFF;
-	TL1 = 0xFF;
+	//leds(led);
+	TH0 = 0xFF;
+	TL0 = 0xF0;
 }
 
 void SetBrightness(unsigned char ledId, unsigned char b) {
@@ -151,9 +151,9 @@ void SetBrightness(unsigned char ledId, unsigned char b) {
 }
 
 void SetBrightnesses(const unsigned char* brigthness_v) {
-	ET1 = 0;
+	ET0 = 0;
 	memcpy(brightness, brigthness_v, LED_COUNT);
-	ET1 = 1;
+	ET0 = 1;
 }
 
 
