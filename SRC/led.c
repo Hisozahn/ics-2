@@ -116,6 +116,26 @@ void WriteLED(unsigned char value)
 //unsigned char tick = 1;
 unsigned char tick = 1;
 unsigned char brightness[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
+unsigned char leds_wait[LED_COUNT] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+/*void T0_ISR( void ) __interrupt ( 1 )
+{	
+	unsigned char i = 0;
+	unsigned char led = 0;
+	unsigned char mask = 1;	
+	
+	for (;i < LED_COUNT; i++) {		
+		leds_wait[i] += brightness[i];
+		if (leds_wait[i] >= 100) {
+			leds_wait[i] -= 100;
+			led += mask;
+		}
+		mask <<= 1;
+	}
+	leds(led);
+	TH0 = 0xFF;
+	TL0 = 0x30;
+}*/
 
 void T0_ISR( void ) __interrupt ( 1 )
 {	
